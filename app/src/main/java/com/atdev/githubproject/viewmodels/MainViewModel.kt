@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
     var repositoryList: Flow<List<RepositoryJsonObject>>? = null
 
     private fun getSearchResult() {
-        job = CoroutineScope(Dispatchers.IO).launch {
+        job = viewModelScope.launch(Dispatchers.IO) {
             val response =  mainRepository.getSearchResult(searchField.value.toString())
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -42,9 +42,7 @@ class MainViewModel @Inject constructor(
         if (searchField.value.isNullOrEmpty()) {
             getRequestField?.invoke()
         } else {
-            viewModelScope.launch(Dispatchers.IO) {
-                getSearchResult()
-            }
+            getSearchResult()
         }
     }
 
