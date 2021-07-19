@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.atdev.githubproject.MainActivity">
+
+    <item
+        android:id="@+id/action_downloaded"
+        android:orderInCategory="100"
+        android:title="@string/action_downloaded"
+        app:showAsAction="never" />
+</menu>
