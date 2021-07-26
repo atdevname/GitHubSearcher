@@ -14,7 +14,13 @@ data class RepositoryEntity(
     @ColumnInfo(name = "owner_cl")
     var owner: String,
 
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Long? = null
-}
+    @ColumnInfo(name = "avatar_url_cl")
+    val avatar_url: String,
+
+    @ColumnInfo(name = "html_url_cl")
+    val html_url: String,
+
+    @PrimaryKey
+    var id: String
+
+)

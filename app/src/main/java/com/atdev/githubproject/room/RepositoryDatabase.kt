@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [RepositoryEntity::class], version = 1, exportSchema = false)
+@Database(entities = [RepositoryEntity::class], version = 2, exportSchema = false)
 abstract class RepositoryDatabase : RoomDatabase() {
 
     abstract fun repositoryDao(): RepositoryDao
@@ -24,7 +24,7 @@ abstract class RepositoryDatabase : RoomDatabase() {
                     context.applicationContext,
                     RepositoryDatabase::class.java,
                     "repository_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

@@ -1,11 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.atdev.githubproject.MainActivity">
+    tools:context="com.atdev.githubproject.activity.MainActivity">
 
     <item
-        android:id="@+id/action_downloaded"
-        android:orderInCategory="100"
-        android:title="@string/action_downloaded"
+        android:id="@+id/action_clearList"
+        android:title="@string/action_clearList"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:title="Search" />
 </menu>

@@ -2,27 +2,27 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/SearchFragment">
+    app:startDestination="@id/users_nav">
 
     <fragment
-        android:id="@+id/SearchFragment"
-        android:name="com.atdev.githubproject.fragments.SearchFragment"
-        android:label="@string/search_fragment_label"
-        tools:layout="@layout/fragment_search">
+        android:id="@+id/users_nav"
+        android:name="com.atdev.githubproject.fragments.UsersFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_users">
+    </fragment>
 
-        <action
-            android:id="@+id/toDownloadFragment"
-            app:destination="@id/DownloadedFragment" />
+    <fragment
+        android:id="@+id/repository_nav"
+        android:name="com.atdev.githubproject.fragments.RepositoryFragment"
+        android:label="Repository"
+        tools:layout="@layout/fragment_repository">
+
     </fragment>
     <fragment
-        android:id="@+id/DownloadedFragment"
+        android:id="@+id/collection_nav"
         android:name="com.atdev.githubproject.fragments.DownloadedFragment"
-        android:label="@string/downloaded_fragment_label"
+        android:label="Collection"
         tools:layout="@layout/fragment_downloaded">
-
-        <action
-            android:id="@+id/toSearchFragment"
-            app:destination="@id/SearchFragment" />
     </fragment>
+
 </navigation>

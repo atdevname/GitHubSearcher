@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">GitHubProject</string>
-    <string name="action_downloaded">Downloaded</string>
+    <string name="action_clearList">Clear list</string>
+
 
     <!-- Strings used for fragments for navigation -->
-    <string name="search_fragment_label">Search</string>
-    <string name="downloaded_fragment_label">Downloaded</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="search_field_hint">Find repository by name</string>
-
+    <string name="repository_name_field">Name:</string>
+    <string name="no_found">No found</string>
+    <string name="there_is_empty">There is empty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity</string>
 </resources>

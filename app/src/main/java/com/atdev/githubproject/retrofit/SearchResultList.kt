@@ -1,6 +1,6 @@
 package com.atdev.githubproject.retrofit
 
-import com.atdev.githubproject.model.ReposResult
+import com.atdev.githubproject.model.RepositorySearchResult
 
-class SearchResultList(val items: List<ReposResult>)
+class SearchResultList(val items: List<RepositorySearchResult>)
 

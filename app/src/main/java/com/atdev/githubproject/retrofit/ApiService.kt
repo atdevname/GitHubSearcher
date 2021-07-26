@@ -1,14 +1,18 @@
 package com.atdev.githubproject.retrofit
 
-import com.atdev.githubproject.model.ReposResult
-import retrofit2.Call
+import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositorySearchResult
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService{
 
     @GET("search/repositories?")
-    suspend fun searchRepos(@Query("q") search: String): Response<ReposResult>
+    suspend fun searchRepos(@Query("q") search: String): Response<RepositorySearchResult>
+
+    @GET("users/{user}/repos")
+    suspend fun searchUser(@Path("user") username: String): Response<List<RepositoryJsonObject>>
 
 }

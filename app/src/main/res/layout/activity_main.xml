@@ -10,27 +10,50 @@
             type="com.atdev.githubproject.viewmodels.MainViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activity.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Theme.GitHubProject.AppBarOverlay">
+            android:theme="@style/Theme.GitHubProject.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:elevation="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/mainColor"
+                android:elevation="2dp"
                 app:popupTheme="@style/Theme.GitHubProject.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_main" />
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigatin_view"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:navGraph="@navigation/nav_graph"
+            tools:layout_editor_absoluteX="0dp" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigatin_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/statusBarColor"
+            app:itemIconTint="@drawable/bottom_navigation_selector"
+            app:itemTextColor="@drawable/bottom_navigation_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bar_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,11 +1,7 @@
 package com.atdev.githubproject.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-
 
 @Dao
 interface RepositoryDao {
@@ -19,10 +15,12 @@ interface RepositoryDao {
     @Query("SELECT * FROM repository_table")
     fun getAllRepositoryList(): List<RepositoryEntity>
 
-    @Query("SELECT COUNT(id) FROM repository_table")
-    fun getCount(): Int
+    @Delete
+    fun deleteRepository(item: RepositoryEntity)
 
     @Query("DELETE FROM repository_table")
     suspend fun deleteAll()
 
+    @Query("SELECT COUNT(id) FROM repository_table")
+    fun getCount(): Int
 }
