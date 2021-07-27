@@ -26,9 +26,12 @@ class MainRepository @Inject constructor(
         return RepositoryEntity(
             item!!.name,
             item.owner.login,
-            item.id,
             item.owner.avatar_url,
-            item.html_url
+            item.html_url,
+            item.watchers_count,
+            item.forks_count,
+            item.language,
+            item.id,
         )
     }
 

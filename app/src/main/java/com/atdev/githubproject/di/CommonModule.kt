@@ -1,18 +1,25 @@
 package com.atdev.githubproject.di
 
 import android.app.Application
+import android.content.Context
 import com.atdev.githubproject.activity.ConnectionChecker
 import com.atdev.githubproject.helpers.MainRepository
-import com.atdev.githubproject.room.RepositoryDatabase
 import com.atdev.githubproject.retrofit.ApiService
+import com.atdev.githubproject.retrofit.NetworkConnectionInterceptor
+import com.atdev.githubproject.retrofit.RetrofitAPIClient
 import com.atdev.githubproject.room.RepositoryDao
+import com.atdev.githubproject.room.RepositoryDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -24,12 +31,21 @@ class CommonModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitService(): ApiService = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(
-            GsonConverterFactory.create()
-        ).build()
-        .create(ApiService::class.java)
+    fun provideRetrofitService(@ApplicationContext context: Context): ApiService {
+        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(NetworkConnectionInterceptor(context))
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(
+                GsonConverterFactory.create()
+            ).client(okHttpClient).build()
+            .create(ApiService::class.java)
+    }
+
 
     @Singleton
     @Provides

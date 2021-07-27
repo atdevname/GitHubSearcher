@@ -1,5 +1,6 @@
 package com.atdev.githubproject.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryJsonObject
@@ -22,11 +23,12 @@ class RepositoryViewModel @Inject constructor(
 
     private fun getSearchResult(value: String) {
         _progressBarVisibility.postValue(true)
-        job = viewModelScope.launch(Dispatchers.IO) {
+        job = viewModelScope.launch {
             val response = mainRepository.getSearchRepository(value)
             withContext(Dispatchers.IO) {
                 if (response.isSuccessful) {
                     response.body()?.items?.let {
+                        Log.i("TEST11", response.body()!!.total_count.toString())
                         repositoryList.postValue(it)
                         if (it.isNotEmpty()) responseEmpty.postValue(false) else responseEmpty.postValue(true)
                         _progressBarVisibility.postValue(false)
@@ -38,7 +40,7 @@ class RepositoryViewModel @Inject constructor(
         }
     }
 
-    private val _progressBarVisibility = MutableLiveData<Boolean>(false)
+    private val _progressBarVisibility = MutableLiveData(false)
     val progressBarVisibility : LiveData<Boolean> = _progressBarVisibility.map { it }
 
     val groupEmptyListVisibility: LiveData<Boolean> = repositoryList.map { it.isEmpty() }

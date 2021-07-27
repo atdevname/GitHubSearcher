@@ -2,9 +2,7 @@ package com.atdev.githubproject.viewmodels
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryJsonObject
 import com.atdev.githubproject.room.RepositoryEntity
@@ -34,4 +32,10 @@ class DownloadedViewModel @Inject constructor(
                 }
         }
     }
+
+    val groupEmptyListVisibility: LiveData<Boolean> =
+        downloadedList.asLiveData(viewModelScope.coroutineContext).map { it.isEmpty() }
+    val recyclerVisibility: LiveData<Boolean> =
+        downloadedList.asLiveData(viewModelScope.coroutineContext).map { !it.isNullOrEmpty() }
+
 }

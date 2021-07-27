@@ -1,6 +1,7 @@
 package com.atdev.githubproject.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,8 +57,8 @@ class DownloadedFragment : Fragment(), AdapterItemClickListener {
             }
         }
 
+        setVisibilityGroupListeners()
         return binding.root
-
     }
 
     override fun onItemDownloadClickListener(item: RepositoryJsonObject) {
@@ -72,6 +73,20 @@ class DownloadedFragment : Fragment(), AdapterItemClickListener {
         adapter?.notifyDataSetChanged()
 
         repositoryViewModel.resetStatusAdded(itemID)
+    }
+
+    private fun setVisibilityGroupListeners() {
+
+        viewModel.recyclerVisibility.observe(viewLifecycleOwner, {
+            if (it) binding.recycler.visibility = View.VISIBLE
+            else binding.recycler.visibility = View.INVISIBLE
+        })
+
+        viewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
+            if (it) binding.emptyListGroup.visibility = View.VISIBLE
+            else binding.emptyListGroup.visibility = View.INVISIBLE
+        })
+
     }
 
 }
