@@ -4,18 +4,20 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.retrofit.NoConnectivityException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @HiltViewModel
 class UsersViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
+
+    var networkConnected  = MutableLiveData<Boolean>()
 
     var repositoryList = MutableLiveData<List<RepositoryJsonObject>>(ArrayList())
     private var job: Job? = null //в каких случаях его закрывать? см ниже в else
@@ -24,25 +26,32 @@ class UsersViewModel @Inject constructor(
     var foundByField = MutableLiveData("")
 
     private fun getSearchResult(value: String) {
-        _progressBarVisibility.postValue(true)
-        job = viewModelScope.launch(Dispatchers.IO) {
-            val response = mainRepository.getSearchUser(value)
+        job = viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        repositoryList.postValue(it)
-                        if (it.isNotEmpty()) {
-                            responseEmpty.postValue(false)
-                            foundByField.postValue(value)
-                        } else {
-                            Log.i("TEST!",response.code().toString())
-                            responseEmpty.postValue(true)
-                            foundByField.postValue("")
+                try {
+                    _progressBarVisibility.postValue(true)
+                    val response = mainRepository.getSearchUser(value)
+                    if (response.isSuccessful) {
+                        Log.i("TEST!", response.message())
+                        response.body()?.let {
+                            repositoryList.postValue(it)
+                            if (it.isNotEmpty()) {
+                                responseEmpty.postValue(false)
+                                foundByField.postValue(value)
+                            } else {
+                                responseEmpty.postValue(true)
+                                foundByField.postValue("")
+                            }
+                            _progressBarVisibility.postValue(false)
                         }
+                    } else {
+                        job?.cancel()
                         _progressBarVisibility.postValue(false)
                     }
-                } else {
-                    job?.cancel()
+                }catch (e: NoConnectivityException){
+                    _progressBarVisibility.postValue(false)
+                    Log.i("TEST11", e.message.toString())
+                    networkConnected.postValue(false)
                 }
             }
         }
@@ -79,4 +88,5 @@ class UsersViewModel @Inject constructor(
 
     var notifyDataSetChanged: (() -> Unit)? = null
     var changeEmptyViews: (() -> Unit)? = null
+
 }

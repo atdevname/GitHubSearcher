@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.atdev.githubproject.viewmodels.DownloadedViewModel" />
@@ -12,59 +11,52 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/emptyLayout"
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/emptyListGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.groupEmptyListVisibility}"
+            app:constraint_referenced_ids="textEmptyList,imageEmptyList" />
+
+        <TextView
+            android:id="@+id/textEmptyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexendmedium"
+            android:text="@string/there_is_empty"
+            android:textColor="#f4cab1"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageEmptyList" />
+
+        <ImageView
+            android:id="@+id/imageEmptyList"
+            style="@style/FragmentsTheme"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="220dp"
+            android:background="@color/mainColor"
+            android:src="@drawable/ic_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            style="@style/RecyclerViewTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/mainColor"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="@{viewModel.recyclerVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:id="@+id/listOfEmptyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lexendmedium"
-                android:text="There is empty"
-                android:textColor="#f4cab1"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listOfEmpty" />
+        </androidx.recyclerview.widget.RecyclerView>
 
-            <ImageView
-                android:id="@+id/listOfEmpty"
-                style="@style/FragmentsTheme"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="220dp"
-                android:background="@color/mainColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/filledLayout"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
-                style="@style/RecyclerViewTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/mainColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

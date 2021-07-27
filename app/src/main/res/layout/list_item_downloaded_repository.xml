@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/add"
+                app:layout_constraintEnd_toStartOf="@+id/delete"
                 app:layout_constraintStart_toEndOf="@+id/profileImage">
 
 
@@ -48,7 +48,7 @@
                     style="@style/ItemFieldsStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="28dp"
+                    android:layout_marginBottom="32dp"
                     android:fontFamily="@font/roboto"
                     android:textColor="#546878"
                     android:textSize="14sp"
@@ -60,12 +60,12 @@
 
                 <TextView
                     style="@style/ItemFieldsStyle"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@string/repository_name_field"
                     android:textSize="15sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -82,11 +82,67 @@
                     android:textSize="21sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.024"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.328"
+                    app:layout_constraintVertical_bias="0.219"
                     tools:text="engapp" />
+
+                <TextView
+                    android:id="@+id/watchers"
+                    style="@style/ItemFieldsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="#546878"
+                    android:textSize="12sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_remove_red_eye_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    app:layout_constraintVertical_bias="0.851"
+                    tools:text="25" />
+
+                <TextView
+                    android:id="@+id/forks"
+                    style="@style/ItemFieldsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="#546878"
+                    android:textSize="12sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_call_split_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.037"
+                    app:layout_constraintStart_toEndOf="@+id/watchers"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    app:layout_constraintVertical_bias="0.88"
+                    tools:text="12" />
+
+                <TextView
+                    android:id="@+id/language"
+                    style="@style/ItemFieldsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="#546878"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:drawableStartCompat="@drawable/ic_baseline_remove_from_queue_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.125"
+                    app:layout_constraintStart_toEndOf="@+id/forks"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    app:layout_constraintVertical_bias="0.88"
+                    tools:text="Kotlin"
+                    tools:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/userIcon"

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterItemClickListener
 import com.atdev.githubproject.model.RepositoryJsonObject
-import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
 class SearchUsersAdapter(
@@ -51,7 +50,7 @@ class SearchUsersAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.search_users_list_item, viewGroup, false)
+            .inflate(R.layout.list_item_search_users, viewGroup, false)
         return ViewHolder(view)
     }
 

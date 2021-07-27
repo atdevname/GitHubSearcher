@@ -3,29 +3,28 @@ package com.atdev.githubproject.activity
 import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.atdev.githubproject.R
 import com.atdev.githubproject.databinding.ActivityMainBinding
-import com.atdev.githubproject.utils.showToast
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
 import com.atdev.githubproject.viewmodels.UsersViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -39,32 +38,23 @@ class MainActivity : AppCompatActivity() {
     private val repositoryViewModel: RepositoryViewModel by viewModels()
     private val usersViewModel: UsersViewModel by viewModels()
 
-    @Inject
-    lateinit var connectionChecker: ConnectionChecker
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_GitHubProject)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycleScope.launchWhenStarted {
-            setSupportActionBar(binding.toolbar)
-            setupActionBar()
+        setSupportActionBar(binding.toolbar)
+        setupActionBar()
 
+        networkObservers()
+    }
 
-            connectionChecker.checking = {
-                val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
-
-                if (activeNetwork?.isConnectedOrConnecting != true) {
-                    showToast("test")
-                }
-            }
-
-        }
-
-
+    private fun networkObservers() {
+        usersViewModel.networkConnected.observe(this, {
+            Snackbar.make(findViewById(android.R.id.content), "No internet, check it out!", Snackbar.LENGTH_LONG)
+                .show();
+        })
     }
 
     private fun setupActionBar() {
@@ -86,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (navController.currentDestination?.id != R.id.collection_nav) {
-            menuInflater.inflate(R.menu.menu_main, menu)
+            menuInflater.inflate(R.menu.main_menu, menu)
             activateToolbarSearch(menu)
             return true
         }
