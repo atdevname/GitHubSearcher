@@ -1,3 +1,4 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="smallPadding">4dp</dimen>
+    <dimen name="roundedImageSize">65dp</dimen>
 </resources>

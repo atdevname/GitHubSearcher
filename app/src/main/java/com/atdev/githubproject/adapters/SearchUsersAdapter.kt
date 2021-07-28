@@ -28,14 +28,15 @@ class SearchUsersAdapter(
 
         val name: TextView = view.findViewById(R.id.name)
         var add: ImageView = view.findViewById(R.id.add)
-        val watchers:TextView = view.findViewById(R.id.watchers)
-        var forks:TextView = view.findViewById(R.id.forks)
-        var language:TextView = view.findViewById(R.id.language)
+        val watchers: TextView = view.findViewById(R.id.watchers)
+        var forks: TextView = view.findViewById(R.id.forks)
+        var language: TextView = view.findViewById(R.id.language)
 
         init {
 
             itemView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
                 view.context.startActivity(intent)
             }
 
@@ -59,14 +60,14 @@ class SearchUsersAdapter(
         viewHolder.watchers.text = dataSet[position].watchers_count
         viewHolder.forks.text = dataSet[position].forks_count
 
-        if (dataSet[position].language != null){
+        if (dataSet[position].language != null) {
             viewHolder.language.visibility = View.VISIBLE
             viewHolder.language.text = dataSet[position].language
         }
 
         if (dataSet[position].added) {
             viewHolder.add.setBackgroundResource(R.drawable.ic_baseline_done_24)
-        }else{
+        } else {
             viewHolder.add.setBackgroundResource(R.drawable.ic_baseline_add_24)
         }
     }

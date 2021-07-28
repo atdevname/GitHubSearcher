@@ -28,14 +28,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/add"
                 app:layout_constraintStart_toStartOf="parent">
 
-
                 <TextView
                     android:id="@+id/name"
-                    style="@style/ItemFieldsStyle"
+                    style="@style/RepositoryNameFieldStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/background"
+                    android:textColor="@color/gray_dark"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -47,13 +46,10 @@
 
                 <TextView
                     android:id="@+id/watchers"
-                    style="@style/ItemFieldsStyle"
+                    style="@style/RepositoryDataFieldStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/background"
-                    android:textSize="13sp"
                     app:drawableStartCompat="@drawable/ic_baseline_remove_red_eye_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,13 +60,10 @@
 
                 <TextView
                     android:id="@+id/forks"
-                    style="@style/ItemFieldsStyle"
+                    style="@style/RepositoryDataFieldStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/background"
-                    android:textSize="13sp"
                     app:drawableStartCompat="@drawable/ic_baseline_call_split_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -82,13 +75,10 @@
 
                 <TextView
                     android:id="@+id/language"
-                    style="@style/ItemFieldsStyle"
+                    style="@style/RepositoryDataFieldStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/background"
-                    android:textSize="13sp"
                     android:visibility="invisible"
                     app:drawableStartCompat="@drawable/ic_baseline_remove_from_queue_24"
                     app:layout_constraintBottom_toBottomOf="parent"

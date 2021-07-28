@@ -40,14 +40,14 @@ class SearchRepositoryAdapter(
         init {
 
             itemView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[adapterPosition].html_url))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
                 view.context.startActivity(intent)
             }
 
             //ну а вдруг что-то пойдет не так и айтем не добавится? как правильно позаботиться чтобы в этом случае дровабл не сменился
             add.setOnClickListener {
-                listener.onItemAddClickListener(dataSet[adapterPosition].id)
-                dataSet[adapterPosition].added = true
+                listener.onItemAddClickListener(dataSet[absoluteAdapterPosition].id)
+                dataSet[absoluteAdapterPosition].added = true
                 add.setBackgroundResource(R.drawable.ic_baseline_done_24)
             }
         }

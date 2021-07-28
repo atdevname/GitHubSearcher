@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBar()
 
         networkObservers()
+
     }
 
     private fun networkObservers() {
@@ -137,8 +138,4 @@ class MainActivity : AppCompatActivity() {
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
-}
-
-class ConnectionChecker {
-    var checking: (() -> Unit)? = null
 }
