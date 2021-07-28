@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.atdev.githubproject.viewmodels.UsersViewModel" />
@@ -11,43 +12,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/background"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray_dark">
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/emptyListGroup"
             android:layout_width="wrap_content"
-            android:visibility="@{viewModel.groupEmptyListVisibility}"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.groupEmptyListVisibility}"
             app:constraint_referenced_ids="textEmptyList,imageEmptyList" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/noFoundGroup"
             android:layout_width="wrap_content"
-            android:visibility="@{viewModel.groupNotFoundVisibility}"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.groupNotFoundVisibility}"
             app:constraint_referenced_ids="imageNoFound,textNoFound" />
-
 
         <TextView
             android:id="@+id/textNoFound"
+            style="@style/BackgroundTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lexendmedium"
             android:text="@string/no_found"
-            android:textColor="#f4cab1"
-            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageNoFound" />
 
         <ImageView
             android:id="@+id/imageNoFound"
-            style="@style/FragmentsTheme"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="220dp"
-            android:background="@color/mainColor"
+            android:background="@color/gray_dark"
             android:src="@drawable/ic_nothing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -56,23 +53,20 @@
 
         <TextView
             android:id="@+id/textEmptyList"
+            style="@style/BackgroundTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lexendmedium"
             android:text="@string/there_is_empty"
-            android:textColor="#f4cab1"
-            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageEmptyList" />
 
         <ImageView
             android:id="@+id/imageEmptyList"
-            style="@style/FragmentsTheme"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="220dp"
-            android:background="@color/mainColor"
+            android:background="@color/gray_dark"
             android:src="@drawable/ic_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -81,32 +75,26 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            style="@style/RecyclerViewTheme"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainColor"
+            android:background="@color/gray_dark"
             android:visibility="@{viewModel.recyclerVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userByField">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
+            app:layout_constraintTop_toBottomOf="@+id/userByField" />
 
         <TextView
             android:id="@+id/userByField"
+            style="@style/UserByFieldStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/lexendmedium"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            tools:text="Found by: atdev"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.033"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Found by: atdev" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressIndicator"
@@ -115,7 +103,7 @@
             android:indeterminate="true"
             android:translationZ="2dp"
             android:visibility="@{viewModel.progressBarVisibility}"
-            app:indicatorColor="#f4cab1"
+            app:indicatorColor="@color/beigeColor"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:trackColor="@android:color/transparent" />

@@ -33,17 +33,16 @@ class DownloadedListAdapter(
         var language:TextView = view.findViewById(R.id.language)
 
         var profileImage: ImageView = view.findViewById(R.id.profileImage)
-
-        private var delete: ImageView = view.findViewById(R.id.delete)
+        var delete: ImageView = view.findViewById(R.id.delete)
 
         init {
             itemView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[adapterPosition].html_url))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
                 view.context.startActivity(intent)
             }
 
             delete.setOnClickListener {
-                listener.onItemDeleteClickListener(dataSet[adapterPosition].id)
+                listener.onItemDeleteClickListener(dataSet[absoluteAdapterPosition].id)
             }
 
         }
@@ -62,6 +61,7 @@ class DownloadedListAdapter(
 
         viewHolder.watchers.text = dataSet[position].watchers_count
         viewHolder.forks.text = dataSet[position].forks_count
+        
 
         if (dataSet[position].language != null){
             viewHolder.language.visibility = View.VISIBLE

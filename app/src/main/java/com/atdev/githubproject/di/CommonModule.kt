@@ -2,11 +2,9 @@ package com.atdev.githubproject.di
 
 import android.app.Application
 import android.content.Context
-import com.atdev.githubproject.activity.ConnectionChecker
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.retrofit.ApiService
 import com.atdev.githubproject.retrofit.NetworkConnectionInterceptor
-import com.atdev.githubproject.retrofit.RetrofitAPIClient
 import com.atdev.githubproject.room.RepositoryDao
 import com.atdev.githubproject.room.RepositoryDatabase
 import dagger.Module
@@ -61,9 +59,5 @@ class CommonModule {
         repositoryDao: RepositoryDao,
         apiService: ApiService
     ) = MainRepository(repositoryDao, apiService)
-
-    @Provides
-    @Singleton
-    fun connectionChecker() = ConnectionChecker()
 
 }
