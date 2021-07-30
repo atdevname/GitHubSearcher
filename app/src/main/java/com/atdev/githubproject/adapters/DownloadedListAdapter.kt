@@ -9,17 +9,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
-import com.atdev.githubproject.listeners.AdapterItemClickListener
-import com.atdev.githubproject.room.RepositoryEntity
+import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
+import com.atdev.githubproject.room.EntityRepositoryDownloaded
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
 class DownloadedListAdapter(
-    private val listener: AdapterItemClickListener
+    private val listener: AdapterDeleteItemClickListener
 ) :
     RecyclerView.Adapter<DownloadedListAdapter.ViewHolder>() {
 
-    var dataSet: List<RepositoryEntity> by Delegates.observable(ArrayList()) { _, _, _ ->
+    var dataSet: List<EntityRepositoryDownloaded> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -28,16 +28,17 @@ class DownloadedListAdapter(
     ) : RecyclerView.ViewHolder(view) {
         val owner: TextView = view.findViewById(R.id.owner)
         val name: TextView = view.findViewById(R.id.name)
-        val watchers:TextView = view.findViewById(R.id.watchers)
-        var forks:TextView = view.findViewById(R.id.forks)
-        var language:TextView = view.findViewById(R.id.language)
+        val watchers: TextView = view.findViewById(R.id.watchers)
+        var forks: TextView = view.findViewById(R.id.forks)
+        var language: TextView = view.findViewById(R.id.language)
 
         var profileImage: ImageView = view.findViewById(R.id.profileImage)
         var delete: ImageView = view.findViewById(R.id.delete)
 
         init {
             itemView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
                 view.context.startActivity(intent)
             }
 
@@ -56,22 +57,22 @@ class DownloadedListAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+        Picasso.get().load(dataSet[position].avatar_url).noFade().fit()
+            .into(viewHolder.profileImage)
+
         viewHolder.owner.text = dataSet[position].owner_login
         viewHolder.name.text = dataSet[position].name
 
         viewHolder.watchers.text = dataSet[position].watchers_count
         viewHolder.forks.text = dataSet[position].forks_count
-        
 
-        if (dataSet[position].language != null){
+        if (dataSet[position].language.isNullOrEmpty()) {
             viewHolder.language.visibility = View.VISIBLE
             viewHolder.language.text = dataSet[position].language
         }
 
-        Picasso.get().load(dataSet[position].avatar_url).noFade().fit().into(viewHolder.profileImage)
-
     }
 
     override fun getItemCount() = dataSet.size
-
 }

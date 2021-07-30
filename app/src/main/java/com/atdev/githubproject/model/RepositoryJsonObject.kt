@@ -11,5 +11,4 @@ data class RepositoryJsonObject(
     var language: String? = "",
     var added:Boolean = false,
     val id: String = UUID.randomUUID().toString(),
-
 )

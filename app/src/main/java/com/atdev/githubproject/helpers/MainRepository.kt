@@ -3,8 +3,10 @@ package com.atdev.githubproject.helpers
 import com.atdev.githubproject.model.RepositorySearchResult
 import com.atdev.githubproject.model.RepositoryJsonObject
 import com.atdev.githubproject.retrofit.ApiService
+import com.atdev.githubproject.room.EntityRepositoryBySearch
+import com.atdev.githubproject.room.EntityRepositoryByUser
 import com.atdev.githubproject.room.RepositoryDao
-import com.atdev.githubproject.room.RepositoryEntity
+import com.atdev.githubproject.room.EntityRepositoryDownloaded
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,10 +22,12 @@ class MainRepository @Inject constructor(
     suspend fun getSearchUser(value: String): Response<List<RepositoryJsonObject>> =
         apiService.searchUser(value)
 
-    fun getAllRepository(): Flow<List<RepositoryEntity>> = repositoryDao.getAllRepository()
+    fun getAllDownloadedRepository(): Flow<List<EntityRepositoryDownloaded>> = repositoryDao.getAllDownloadedRepository()
+    fun getAllBySearchRepository(): Flow<List<EntityRepositoryBySearch>> = repositoryDao.getAllBySearchRepository()
+    fun getAllByUserRepository(): Flow<List<EntityRepositoryByUser>> = repositoryDao.getAllByUserRepository()
 
-    fun transformItemInDao(item: RepositoryJsonObject?): RepositoryEntity {
-        return RepositoryEntity(
+    fun transformItemInDao(item: RepositoryJsonObject?): EntityRepositoryDownloaded {
+        return EntityRepositoryDownloaded(
             item!!.name,
             item.owner.login,
             item.owner.avatar_url,
@@ -35,11 +39,11 @@ class MainRepository @Inject constructor(
         )
     }
 
-    suspend fun addItemInDao(item: RepositoryEntity) {
-        repositoryDao.addRepository(item)
+    suspend fun addItemInDao(item: EntityRepositoryDownloaded) {
+        repositoryDao.addDownloadedRepository(item)
     }
 
-    fun deleteItemDao(item: RepositoryEntity) {
-        repositoryDao.deleteRepository(item)
+    fun deleteItemDao(item: EntityRepositoryDownloaded) {
+        repositoryDao.deleteDownloadedRepository(item)
     }
 }

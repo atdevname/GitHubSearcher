@@ -40,7 +40,6 @@ class SearchUsersAdapter(
                 view.context.startActivity(intent)
             }
 
-            //ну а вдруг что-то пойдет не так и айтем не добавится? как правильно позаботиться чтобы в этом случае дровабл не сменился
             add.setOnClickListener {
                 listener.onItemAddClickListener(dataSet[absoluteAdapterPosition].id)
                 dataSet[absoluteAdapterPosition].added = true

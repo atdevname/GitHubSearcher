@@ -1,6 +1,5 @@
 package com.atdev.githubproject.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryJsonObject
@@ -18,8 +17,8 @@ class RepositoryViewModel @Inject constructor(
 ) : ViewModel() {
 
     var repositoryList = MutableLiveData<List<RepositoryJsonObject>>(ArrayList())
-    private var job: Job? = null //в каких случаях его закрывать? см ниже в else
-    var responseEmpty = MutableLiveData<Boolean>(false)
+    private var job: Job? = null
+    private var responseEmpty = MutableLiveData<Boolean>(false)
 
     private fun getSearchResult(value: String) {
         _progressBarVisibility.postValue(true)
@@ -28,9 +27,9 @@ class RepositoryViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 if (response.isSuccessful) {
                     response.body()?.items?.let {
-                        Log.i("TEST11", response.body()!!.total_count.toString())
                         repositoryList.postValue(it)
-                        if (it.isNotEmpty()) responseEmpty.postValue(false) else responseEmpty.postValue(true)
+                        if (it.isNotEmpty()) responseEmpty.postValue(false)
+                        else responseEmpty.postValue(true)
                         _progressBarVisibility.postValue(false)
                     }
                 } else {
@@ -40,8 +39,12 @@ class RepositoryViewModel @Inject constructor(
         }
     }
 
+    fun searchByName(value: String) {
+        getSearchResult(value)
+    }
+
     private val _progressBarVisibility = MutableLiveData(false)
-    val progressBarVisibility : LiveData<Boolean> = _progressBarVisibility.map { it }
+    val progressBarVisibility: LiveData<Boolean> = _progressBarVisibility.map { it }
 
     val groupEmptyListVisibility: LiveData<Boolean> = repositoryList.map { it.isEmpty() }
     val groupNotFoundVisibility: LiveData<Boolean> = responseEmpty.map { it == true }
@@ -49,18 +52,9 @@ class RepositoryViewModel @Inject constructor(
 
     fun addItemInDao(itemId: String) {
         val item = repositoryList.value?.find { item -> item.id == itemId }
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             mainRepository.addItemInDao(mainRepository.transformItemInDao(item))
         }
-    }
-
-    fun searchByName(value: String) {
-        getSearchResult(value)
-    }
-
-    fun resetStatusAdded(itemId: String) {
-        val item = repositoryList.value?.find { item -> item.id == itemId }
-        item?.added = false
     }
 
     fun clearFoundList() {
@@ -70,5 +64,4 @@ class RepositoryViewModel @Inject constructor(
     }
 
     var notifyDataSetChanged: (() -> Unit)? = null
-    var changeEmptyViews: (() -> Unit)? = null
 }

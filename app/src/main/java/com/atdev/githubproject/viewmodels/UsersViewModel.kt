@@ -1,6 +1,5 @@
 package com.atdev.githubproject.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryJsonObject
@@ -17,44 +16,41 @@ class UsersViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    var networkConnected  = MutableLiveData<Boolean>()
+    var networkConnected = MutableLiveData<Boolean>()
 
     var repositoryList = MutableLiveData<List<RepositoryJsonObject>>(ArrayList())
-    private var job: Job? = null //в каких случаях его закрывать? см ниже в else
+    private var job: Job? = null
     private var responseEmpty = MutableLiveData(false)
 
     var foundByField = MutableLiveData("")
 
     private fun getSearchResult(value: String) {
-        job = viewModelScope.launch(Dispatchers.Main) {
+        job = viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
                     _progressBarVisibility.postValue(true)
                     val response = mainRepository.getSearchUser(value)
                     if (response.isSuccessful) {
-                        Log.i("TEST!", response.message())
-                        response.body()?.let {
-                            repositoryList.postValue(it)
-                            if (it.isNotEmpty()) {
-                                responseEmpty.postValue(false)
-                                foundByField.postValue(value)
-                            } else {
-                                responseEmpty.postValue(true)
-                                foundByField.postValue("")
-                            }
-                            _progressBarVisibility.postValue(false)
+                        repositoryList.postValue(response.body())
+                        if (response.body()!!.isNotEmpty()) {
+                            responseEmpty.postValue(false)
+                            foundByField.postValue(value)
+                        } else {
+                            responseEmpty.postValue(true)
                         }
                     } else {
                         job?.cancel()
-                        _progressBarVisibility.postValue(false)
                     }
-                }catch (e: NoConnectivityException){
-                    _progressBarVisibility.postValue(false)
-                    Log.i("TEST11", e.message.toString())
+                } catch (e: NoConnectivityException) {
                     networkConnected.postValue(false)
                 }
             }
+            _progressBarVisibility.postValue(false)
         }
+    }
+
+    fun searchByName(value: String) {
+        getSearchResult(value)
     }
 
     private val _progressBarVisibility = MutableLiveData<Boolean>(false)
@@ -66,13 +62,9 @@ class UsersViewModel @Inject constructor(
 
     fun addItemInDao(itemId: String) {
         val item = repositoryList.value?.find { item -> item.id == itemId }
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             mainRepository.addItemInDao(mainRepository.transformItemInDao(item))
         }
-    }
-
-    fun searchByName(value: String) {
-        getSearchResult(value)
     }
 
     fun resetStatusAdded(itemId: String) {
