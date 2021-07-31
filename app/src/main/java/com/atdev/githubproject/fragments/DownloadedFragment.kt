@@ -47,7 +47,7 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         lifecycleScope.launch(Dispatchers.Main) {
-            downloadedViewModel.downloadedListRepositoryDownloadedEntity.collect {
+            downloadedViewModel.downloadedListRepositoryEntity.collect {
                 adapter?.dataSet = it
             }
         }

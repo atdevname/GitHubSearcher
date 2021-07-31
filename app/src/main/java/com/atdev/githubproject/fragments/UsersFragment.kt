@@ -14,6 +14,7 @@ import com.atdev.githubproject.R
 import com.atdev.githubproject.activity.MainActivity
 import com.atdev.githubproject.adapters.SearchUsersAdapter
 import com.atdev.githubproject.databinding.FragmentUsersBinding
+import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.listeners.AdapterItemClickListener
 import com.atdev.githubproject.viewmodels.SharedViewModel
 import com.atdev.githubproject.viewmodels.UsersViewModel
@@ -40,7 +41,6 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
             false
         )
 
-
         binding.viewModel = usersViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
@@ -65,7 +65,7 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
         })
 
         usersViewModel.networkConnected.observe(viewLifecycleOwner, {
-            sharedViewModel.setNetworkConnected(it)
+            sharedViewModel.setNetworkConnected(ViewModelEvent(it))
         })
 
         usersViewModel.foundByField.observe(viewLifecycleOwner, {

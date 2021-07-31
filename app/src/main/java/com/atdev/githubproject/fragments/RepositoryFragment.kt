@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atdev.githubproject.R
 import com.atdev.githubproject.activity.MainActivity
 import com.atdev.githubproject.adapters.SearchRepositoryAdapter
 import com.atdev.githubproject.databinding.FragmentRepositoryBinding
+import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.listeners.AdapterItemClickListener
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
 import com.atdev.githubproject.viewmodels.SharedViewModel
@@ -23,7 +25,7 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
 
     private lateinit var binding: FragmentRepositoryBinding
 
-    private val repositoryViewModel: RepositoryViewModel by activityViewModels()
+    private val repositoryViewModel: RepositoryViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val adapter by lazy { activity?.let { SearchRepositoryAdapter(this) } }
@@ -57,8 +59,12 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
     }
 
     private fun setupObservers() {
-        repositoryViewModel.repositoryList.observe(requireActivity(), {
+        repositoryViewModel.repositoryList.observe(viewLifecycleOwner, {
             adapter?.dataSet = it
+        })
+
+        repositoryViewModel.networkConnected.observe(viewLifecycleOwner, {
+            sharedViewModel.setNetworkConnected(ViewModelEvent(it))
         })
 
         sharedViewModel.searchValue.observe(viewLifecycleOwner, { event ->

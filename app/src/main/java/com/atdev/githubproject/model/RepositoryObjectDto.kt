@@ -2,6 +2,8 @@ package com.atdev.githubproject.model
 
 import java.util.*
 
+data class RepositorySearchResult(var items: List<RepositoryObjectDto>)
+
 data class RepositoryObjectDto(
     val name: String = "",
     val owner: GitHubUser,

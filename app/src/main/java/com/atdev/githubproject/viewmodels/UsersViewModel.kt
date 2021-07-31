@@ -31,12 +31,14 @@ class UsersViewModel @Inject constructor(
                     _progressBarVisibility.postValue(true)
                     val response = mainRepository.getSearchUser(value)
                     if (response.isSuccessful) {
-                        repositoryList.postValue(response.body())
-                        if (response.body()!!.isNotEmpty()) {
-                            responseEmpty.postValue(false)
-                            foundByField.postValue(value)
-                        } else {
-                            responseEmpty.postValue(true)
+                        response.body()?.let {
+                            repositoryList.postValue(it)
+                            if (response.body()!!.isNotEmpty()) {
+                                responseEmpty.postValue(false)
+                                foundByField.postValue(value)
+                            } else {
+                                responseEmpty.postValue(true)
+                            }
                         }
                     } else {
                         job?.cancel()

@@ -19,7 +19,7 @@ class DownloadedListAdapter(
 ) :
     RecyclerView.Adapter<DownloadedListAdapter.ViewHolder>() {
 
-    var dataSet: List<RepositoryDownloadedEntity> by Delegates.observable(ArrayList()) { _, _, _ ->
+    var dataSet: List<RepositoryDownloadedEntity> by Delegates.observable(listOf()) { _, _, _ ->
         notifyDataSetChanged()
     }
 

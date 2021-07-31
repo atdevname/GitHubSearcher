@@ -9,12 +9,9 @@ class SharedViewModel () : ViewModel() {
 
     val searchValue = MutableLiveData<ViewModelEvent<String>>()
 
-    private var _networkConnected = MutableLiveData<Boolean>()
-    val networkConnected: LiveData<Boolean>
-        get() = _networkConnected
-
-    fun setNetworkConnected(value: Boolean) {
-        _networkConnected.value = value
+    var networkConnected = MutableLiveData<ViewModelEvent<Boolean>>()
+    fun setNetworkConnected(value: ViewModelEvent<Boolean>) {
+        networkConnected.value = value
     }
 
 

@@ -3,6 +3,7 @@ package com.atdev.githubproject.viewmodels
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
 import com.atdev.githubproject.model.RepositoryObjectDto
+import com.atdev.githubproject.retrofit.NoConnectivityException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,27 +17,35 @@ class RepositoryViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(ArrayList())
+    var networkConnected = MutableLiveData<Boolean>()
+
+    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(listOf())
     private var job: Job? = null
     private var responseEmpty = MutableLiveData<Boolean>(false)
 
     private fun getSearchResult(value: String) {
-        _progressBarVisibility.postValue(true)
         job = viewModelScope.launch {
-            val response = mainRepository.getSearchRepository(value)
             withContext(Dispatchers.IO) {
-                if (response.isSuccessful) {
-                    response.body()?.items?.let {
-                        repositoryList.postValue(it)
-
-                        if (it.isNotEmpty()) responseEmpty.postValue(false)
-                        else responseEmpty.postValue(true)
-                        _progressBarVisibility.postValue(false)
+                try {
+                    _progressBarVisibility.postValue(true)
+                    val response = mainRepository.getSearchRepository(value)
+                    if (response.isSuccessful) {
+                        response.body()?.items.let {
+                            repositoryList.postValue(it)
+                            if (it!!.isNotEmpty()) {
+                                responseEmpty.postValue(false)
+                            } else {
+                                responseEmpty.postValue(true)
+                            }
+                        }
+                    } else {
+                        job?.cancel()
                     }
-                } else {
-                    job?.cancel()
+                } catch (e: NoConnectivityException) {
+                    networkConnected.postValue(false)
                 }
             }
+            _progressBarVisibility.postValue(false)
         }
     }
 
