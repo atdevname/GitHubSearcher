@@ -4,12 +4,11 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.provider.SearchRecentSuggestions
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -19,10 +18,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.atdev.githubproject.providers.LastResultProvider
 import com.atdev.githubproject.R
 import com.atdev.githubproject.databinding.ActivityMainBinding
+import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
-import com.atdev.githubproject.viewmodels.UsersViewModel
+import com.atdev.githubproject.viewmodels.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
     private val navController: NavController by lazy { findNavController(R.id.nav_host_fragment) }
 
     private val repositoryViewModel: RepositoryViewModel by viewModels()
-    private val usersViewModel: UsersViewModel by viewModels()
+
+    private val sharedViewModel:SharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +50,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBar()
 
         networkObservers()
-
     }
 
     private fun networkObservers() {
-        usersViewModel.networkConnected.observe(this, {
+        sharedViewModel.networkConnected.observe(this, {
             Snackbar.make(findViewById(android.R.id.content), "No internet, check it out!", Snackbar.LENGTH_LONG)
                 .show();
         })
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
 
+
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String): Boolean {
@@ -99,15 +101,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onQueryTextSubmit(query: String): Boolean {
-
-                    if (navController.currentDestination?.id == R.id.repository_nav) {
-                        repositoryViewModel.searchByName(query)
-                    }
-                    if (navController.currentDestination?.id == R.id.users_nav) {
-                        usersViewModel.searchByName(query)
-                    }
-
+                    sharedViewModel.searchValue.postValue(ViewModelEvent(query))
                     hideKeyboard()
+
+                    SearchRecentSuggestions(
+                        this@MainActivity,
+                        LastResultProvider.AUTHORITY,
+                        LastResultProvider.MODE
+                    ).saveRecentQuery(query, null)
+                    Log.i("TEST!",query)
+
                     return true
                 }
             }

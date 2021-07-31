@@ -81,7 +81,6 @@
             android:visibility="@{viewModel.recyclerVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-
         </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator

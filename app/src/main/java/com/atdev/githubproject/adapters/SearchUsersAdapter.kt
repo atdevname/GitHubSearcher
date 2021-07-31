@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterItemClickListener
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import kotlin.properties.Delegates
 
 class SearchUsersAdapter(
@@ -18,7 +18,7 @@ class SearchUsersAdapter(
 ) :
     RecyclerView.Adapter<SearchUsersAdapter.ViewHolder>() {
 
-    var dataSet: List<RepositoryJsonObject> by Delegates.observable(ArrayList()) { _, _, _ ->
+    var dataSet: List<RepositoryObjectDto> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -40,7 +40,6 @@ class SearchUsersAdapter(
                 view.context.startActivity(intent)
             }
 
-            //ну а вдруг что-то пойдет не так и айтем не добавится? как правильно позаботиться чтобы в этом случае дровабл не сменился
             add.setOnClickListener {
                 listener.onItemAddClickListener(dataSet[absoluteAdapterPosition].id)
                 dataSet[absoluteAdapterPosition].added = true

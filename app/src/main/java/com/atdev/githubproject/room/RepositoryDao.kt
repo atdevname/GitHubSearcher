@@ -7,20 +7,18 @@ import kotlinx.coroutines.flow.Flow
 interface RepositoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addRepository(repository: RepositoryEntity)
+    suspend fun addDownloadedRepository(repositoryDownloadedEntity: RepositoryDownloadedEntity)
 
-    @Query("SELECT * FROM repository_table")
-    fun getAllRepository(): Flow<List<RepositoryEntity>>
-
-    @Query("SELECT * FROM repository_table")
-    fun getAllRepositoryList(): List<RepositoryEntity>
+    @Query("SELECT * FROM downloaded_table")
+    fun getAllDownloadedRepository(): Flow<List<RepositoryDownloadedEntity>>
 
     @Delete
-    fun deleteRepository(item: RepositoryEntity)
+    fun deleteDownloadedRepository(item: RepositoryDownloadedEntity)
 
-    @Query("DELETE FROM repository_table")
-    suspend fun deleteAll()
+    @Query("DELETE FROM downloaded_table")
+    suspend fun deleteAllDownloaded()
 
-    @Query("SELECT COUNT(id) FROM repository_table")
+    @Query("SELECT COUNT(id) FROM downloaded_table")
     fun getCount(): Int
+
 }

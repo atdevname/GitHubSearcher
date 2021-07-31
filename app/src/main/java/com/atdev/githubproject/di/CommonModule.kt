@@ -18,14 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 class CommonModule {
-
-    companion object {
-        const val BASE_URL: String = "https://api.github.com/"
-    }
 
     @Singleton
     @Provides
@@ -37,7 +32,7 @@ class CommonModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("https://api.github.com/")
             .addConverterFactory(
                 GsonConverterFactory.create()
             ).client(okHttpClient).build()

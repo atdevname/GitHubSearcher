@@ -5,7 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [RepositoryEntity::class], version = 4, exportSchema = false)
+@Database(entities = [
+    RepositoryDownloadedEntity::class], version = 5, exportSchema = false)
 abstract class RepositoryDatabase : RoomDatabase() {
 
     abstract fun repositoryDao(): RepositoryDao
@@ -16,10 +17,10 @@ abstract class RepositoryDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): RepositoryDatabase {
             val tempInstance = INSTANCE
-            if(tempInstance != null){
+            if (tempInstance != null) {
                 return tempInstance
             }
-            synchronized(this){
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     RepositoryDatabase::class.java,

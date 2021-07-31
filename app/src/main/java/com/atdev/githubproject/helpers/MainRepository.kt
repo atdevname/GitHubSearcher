@@ -1,10 +1,9 @@
 package com.atdev.githubproject.helpers
 
 import com.atdev.githubproject.model.RepositorySearchResult
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.retrofit.ApiService
-import com.atdev.githubproject.room.RepositoryDao
-import com.atdev.githubproject.room.RepositoryEntity
+import com.atdev.githubproject.room.*
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
@@ -17,13 +16,13 @@ class MainRepository @Inject constructor(
     suspend fun getSearchRepository(value: String): Response<RepositorySearchResult> =
         apiService.searchRepos(value)
 
-    suspend fun getSearchUser(value: String): Response<List<RepositoryJsonObject>> =
+    suspend fun getSearchUser(value: String): Response<List<RepositoryObjectDto>> =
         apiService.searchUser(value)
 
-    fun getAllRepository(): Flow<List<RepositoryEntity>> = repositoryDao.getAllRepository()
+    fun getAllDownloadedRepository(): Flow<List<RepositoryDownloadedEntity>> = repositoryDao.getAllDownloadedRepository()
 
-    fun transformItemInDao(item: RepositoryJsonObject?): RepositoryEntity {
-        return RepositoryEntity(
+    fun transformItemInDao(item: RepositoryObjectDto?): RepositoryDownloadedEntity {
+        return RepositoryDownloadedEntity(
             item!!.name,
             item.owner.login,
             item.owner.avatar_url,
@@ -35,11 +34,11 @@ class MainRepository @Inject constructor(
         )
     }
 
-    suspend fun addItemInDao(item: RepositoryEntity) {
-        repositoryDao.addRepository(item)
+    suspend fun addItemInDao(item: RepositoryDownloadedEntity) {
+        repositoryDao.addDownloadedRepository(item)
     }
 
-    fun deleteItemDao(item: RepositoryEntity) {
-        repositoryDao.deleteRepository(item)
+    fun deleteItemDao(item: RepositoryDownloadedEntity) {
+        repositoryDao.deleteDownloadedRepository(item)
     }
 }
