@@ -4,27 +4,29 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.provider.SearchRecentSuggestions
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.atdev.githubproject.providers.LastResultProvider
 import com.atdev.githubproject.R
 import com.atdev.githubproject.databinding.ActivityMainBinding
 import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
 import com.atdev.githubproject.viewmodels.SharedViewModel
-import com.atdev.githubproject.viewmodels.UsersViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
 
+
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String): Boolean {
@@ -100,6 +103,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     sharedViewModel.searchValue.postValue(ViewModelEvent(query))
                     hideKeyboard()
+
+                    SearchRecentSuggestions(
+                        this@MainActivity,
+                        LastResultProvider.AUTHORITY,
+                        LastResultProvider.MODE
+                    ).saveRecentQuery(query, null)
+                    Log.i("TEST!",query)
+
                     return true
                 }
             }

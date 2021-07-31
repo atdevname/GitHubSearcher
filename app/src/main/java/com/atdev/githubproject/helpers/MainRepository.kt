@@ -1,7 +1,7 @@
 package com.atdev.githubproject.helpers
 
 import com.atdev.githubproject.model.RepositorySearchResult
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.retrofit.ApiService
 import com.atdev.githubproject.room.EntityRepositoryBySearch
 import com.atdev.githubproject.room.EntityRepositoryByUser
@@ -19,14 +19,12 @@ class MainRepository @Inject constructor(
     suspend fun getSearchRepository(value: String): Response<RepositorySearchResult> =
         apiService.searchRepos(value)
 
-    suspend fun getSearchUser(value: String): Response<List<RepositoryJsonObject>> =
+    suspend fun getSearchUser(value: String): Response<List<RepositoryObjectDto>> =
         apiService.searchUser(value)
 
     fun getAllDownloadedRepository(): Flow<List<EntityRepositoryDownloaded>> = repositoryDao.getAllDownloadedRepository()
-    fun getAllBySearchRepository(): Flow<List<EntityRepositoryBySearch>> = repositoryDao.getAllBySearchRepository()
-    fun getAllByUserRepository(): Flow<List<EntityRepositoryByUser>> = repositoryDao.getAllByUserRepository()
 
-    fun transformItemInDao(item: RepositoryJsonObject?): EntityRepositoryDownloaded {
+    fun transformItemInDao(item: RepositoryObjectDto?): EntityRepositoryDownloaded {
         return EntityRepositoryDownloaded(
             item!!.name,
             item.owner.login,

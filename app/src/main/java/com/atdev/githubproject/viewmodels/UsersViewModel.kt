@@ -2,7 +2,7 @@ package com.atdev.githubproject.viewmodels
 
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.retrofit.NoConnectivityException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ class UsersViewModel @Inject constructor(
 
     var networkConnected = MutableLiveData<Boolean>()
 
-    var repositoryList = MutableLiveData<List<RepositoryJsonObject>>(ArrayList())
+    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(ArrayList())
     private var job: Job? = null
     private var responseEmpty = MutableLiveData(false)
 

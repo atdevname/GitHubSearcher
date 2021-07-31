@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterItemClickListener
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
@@ -19,7 +19,7 @@ class SearchRepositoryAdapter(
 ) :
     RecyclerView.Adapter<SearchRepositoryAdapter.ViewHolder>() {
 
-    var dataSet: List<RepositoryJsonObject> by Delegates.observable(ArrayList()) { _, _, _ ->
+    var dataSet: List<RepositoryObjectDto> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 

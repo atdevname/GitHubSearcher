@@ -2,7 +2,7 @@ package com.atdev.githubproject.viewmodels
 
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
-import com.atdev.githubproject.model.RepositoryJsonObject
+import com.atdev.githubproject.model.RepositoryObjectDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,7 +16,7 @@ class RepositoryViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    var repositoryList = MutableLiveData<List<RepositoryJsonObject>>(ArrayList())
+    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(ArrayList())
     private var job: Job? = null
     private var responseEmpty = MutableLiveData<Boolean>(false)
 
@@ -28,6 +28,7 @@ class RepositoryViewModel @Inject constructor(
                 if (response.isSuccessful) {
                     response.body()?.items?.let {
                         repositoryList.postValue(it)
+
                         if (it.isNotEmpty()) responseEmpty.postValue(false)
                         else responseEmpty.postValue(true)
                         _progressBarVisibility.postValue(false)
