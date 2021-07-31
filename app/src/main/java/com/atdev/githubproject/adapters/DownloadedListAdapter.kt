@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
-import com.atdev.githubproject.room.EntityRepositoryDownloaded
+import com.atdev.githubproject.room.RepositoryDownloadedEntity
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
@@ -19,7 +19,7 @@ class DownloadedListAdapter(
 ) :
     RecyclerView.Adapter<DownloadedListAdapter.ViewHolder>() {
 
-    var dataSet: List<EntityRepositoryDownloaded> by Delegates.observable(ArrayList()) { _, _, _ ->
+    var dataSet: List<RepositoryDownloadedEntity> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 

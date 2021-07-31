@@ -18,7 +18,7 @@ class UsersViewModel @Inject constructor(
 
     var networkConnected = MutableLiveData<Boolean>()
 
-    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(ArrayList())
+    var repositoryList = MutableLiveData<List<RepositoryObjectDto>>(listOf())
     private var job: Job? = null
     private var responseEmpty = MutableLiveData(false)
 

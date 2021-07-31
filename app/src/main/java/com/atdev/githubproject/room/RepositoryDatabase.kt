@@ -4,12 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 
 @Database(entities = [
-    EntityRepositoryDownloaded::class,
-    EntityRepositoryByUser::class,
-    EntityRepositoryBySearch::class], version = 4, exportSchema = false)
+    RepositoryDownloadedEntity::class], version = 5, exportSchema = false)
 abstract class RepositoryDatabase : RoomDatabase() {
 
     abstract fun repositoryDao(): RepositoryDao

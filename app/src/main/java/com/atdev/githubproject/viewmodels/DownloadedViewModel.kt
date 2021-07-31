@@ -2,7 +2,7 @@ package com.atdev.githubproject.viewmodels
 
 import androidx.lifecycle.*
 import com.atdev.githubproject.helpers.MainRepository
-import com.atdev.githubproject.room.EntityRepositoryDownloaded
+import com.atdev.githubproject.room.RepositoryDownloadedEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -17,11 +17,11 @@ class DownloadedViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    val downloadedListRepositoryDownloaded: Flow<List<EntityRepositoryDownloaded>> = mainRepository.getAllDownloadedRepository()
+    val downloadedListRepositoryDownloadedEntity: Flow<List<RepositoryDownloadedEntity>> = mainRepository.getAllDownloadedRepository()
 
     fun deleteItemDao(itemId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            downloadedListRepositoryDownloaded.map { it.find { item -> item.id == itemId } }
+            downloadedListRepositoryDownloadedEntity.map { it.find { item -> item.id == itemId } }
                 .filterNotNull().collect {
                     mainRepository.deleteItemDao(it)
                 }
@@ -29,8 +29,8 @@ class DownloadedViewModel @Inject constructor(
     }
 
     val groupEmptyListVisibility: LiveData<Boolean> =
-        downloadedListRepositoryDownloaded.asLiveData(viewModelScope.coroutineContext).map { it.isEmpty() }
+        downloadedListRepositoryDownloadedEntity.asLiveData(viewModelScope.coroutineContext).map { it.isEmpty() }
     val recyclerVisibility: LiveData<Boolean> =
-        downloadedListRepositoryDownloaded.asLiveData(viewModelScope.coroutineContext).map { !it.isNullOrEmpty() }
+        downloadedListRepositoryDownloadedEntity.asLiveData(viewModelScope.coroutineContext).map { !it.isNullOrEmpty() }
 
 }
