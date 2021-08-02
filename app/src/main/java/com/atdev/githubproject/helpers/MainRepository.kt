@@ -1,5 +1,8 @@
 package com.atdev.githubproject.helpers
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.atdev.githubproject.model.RepositorySearchResult
 import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.retrofit.ApiService
@@ -13,11 +16,21 @@ class MainRepository @Inject constructor(
     private val repositoryDao: RepositoryDao,
     private val apiService: ApiService
 ) {
-    suspend fun getSearchRepository(value: String): Response<RepositorySearchResult> =
-        apiService.searchRepos(value)
 
-    suspend fun getSearchUser(value: String): Response<List<RepositoryObjectDto>> =
-        apiService.searchUser(value)
+    fun getPagingDataByName(query:String): Flow<PagingData<RepositoryObjectDto>> {
+        return Pager(
+            config = PagingConfig(20),
+            pagingSourceFactory = { RepoPagingSourceByName(apiService,query) }
+        ).flow
+    }
+
+    fun getPagingDataByUser(query:String): Flow<PagingData<RepositoryObjectDto>> {
+        return Pager(
+            config = PagingConfig(20),
+            pagingSourceFactory = { RepoPagingSourceByUser(apiService,query) }
+        ).flow
+    }
+
 
     fun getAllDownloadedRepository(): Flow<List<RepositoryDownloadedEntity>> = repositoryDao.getAllDownloadedRepository()
 

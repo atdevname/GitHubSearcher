@@ -3,25 +3,19 @@ package com.atdev.githubproject.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.view.isVisible
-import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterItemClickListener
 import com.atdev.githubproject.model.RepositoryObjectDto
-import com.squareup.picasso.Picasso
 
-class SearchRepositoryAdapter(
+class SearchByUserAdapter(
     private val listener: AdapterItemClickListener
 ) :
-    PagingDataAdapter<RepositoryObjectDto, SearchRepositoryAdapter.ViewHolder>(COMPARATOR) {
+    PagingDataAdapter<RepositoryObjectDto, SearchByUserAdapter.ViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<RepositoryObjectDto>() {
@@ -42,13 +36,10 @@ class SearchRepositoryAdapter(
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val owner: TextView = view.findViewById(R.id.owner)
         val name: TextView = view.findViewById(R.id.name)
         val watchers: TextView = view.findViewById(R.id.watchers)
         var forks: TextView = view.findViewById(R.id.forks)
-        var language: TextView = view.findViewById(R.id.languageUser)
-
-        var profileImage: ImageView = view.findViewById(R.id.profileImage)
+        var language: TextView = view.findViewById(R.id.language)
 
         var add: ImageView = view.findViewById(R.id.addRepo)
 
@@ -56,24 +47,25 @@ class SearchRepositoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_search_repository, parent, false)
+            .inflate(R.layout.list_item_search_users, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = getItem(position)
         if (repo != null) {
-            Picasso.get().load(repo.owner.avatar_url).noFade().fit()
-                .into(holder.profileImage)
 
             holder.name.text = repo.name
 
-            holder.owner.text = repo.owner.login
             holder.name.text = repo.name
 
             holder.watchers.text = repo.watchers_count
             holder.forks.text = repo.forks_count
 
+            if (repo.language!!.isNotEmpty()) {
+                holder.language.visibility = View.VISIBLE
+                holder.language.text = repo.language
+            }
 
             ///Переделать
             holder.add.setOnClickListener {
@@ -83,27 +75,5 @@ class SearchRepositoryAdapter(
             }
 
         }
-    }
-}
-
-class FooterAdapter(val retry: () -> Unit) : LoadStateAdapter<FooterAdapter.ViewHolder>() {
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
-        val retryButton: Button = itemView.findViewById(R.id.retry_button)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.footer_item, parent, false)
-        val holder = ViewHolder(view)
-        holder.retryButton.setOnClickListener {
-            retry()
-        }
-        return holder
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
-        holder.progressBar.isVisible = loadState is LoadState.Loading
-        holder.retryButton.isVisible = loadState is LoadState.Error
     }
 }

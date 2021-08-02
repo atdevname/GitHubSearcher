@@ -1,7 +1,9 @@
 package com.atdev.githubproject.listeners
 
+import com.atdev.githubproject.model.RepositoryObjectDto
+
 interface AdapterItemClickListener {
-    fun onItemAddClickListener(itemID:String)
+    fun onItemAddClickListener(item:RepositoryObjectDto)
 }
 
 interface AdapterDeleteItemClickListener {

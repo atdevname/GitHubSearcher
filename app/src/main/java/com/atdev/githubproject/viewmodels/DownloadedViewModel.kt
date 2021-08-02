@@ -19,7 +19,6 @@ class DownloadedViewModel @Inject constructor(
 
     val downloadedListRepositoryEntity: Flow<List<RepositoryDownloadedEntity>> = mainRepository.getAllDownloadedRepository()
 
-    //Показать Диме конструкцию
     fun deleteItemDao(itemId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             downloadedListRepositoryEntity.map { it.find { item -> item.id == itemId } }
