@@ -7,14 +7,14 @@
     <fragment
         android:id="@+id/users_nav"
         android:name="com.atdev.githubproject.fragments.UsersFragment"
-        android:label="Users"
+        android:label="By users"
         tools:layout="@layout/fragment_users">
     </fragment>
 
     <fragment
         android:id="@+id/repository_nav"
         android:name="com.atdev.githubproject.fragments.RepositoryFragment"
-        android:label="Repository"
+        android:label="By name"
         tools:layout="@layout/fragment_repository">
 
     </fragment>

@@ -14,6 +14,8 @@ import com.atdev.githubproject.activity.MainActivity
 import com.atdev.githubproject.adapters.DownloadedListAdapter
 import com.atdev.githubproject.databinding.FragmentDownloadedBinding
 import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
+import com.atdev.githubproject.model.RepositoryObjectDto
+import com.atdev.githubproject.room.RepositoryDownloadedEntity
 import com.atdev.githubproject.viewmodels.DownloadedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +42,7 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
             container,
             false
         )
-        (requireActivity() as MainActivity).hideOptionMenu()
+        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         binding.viewModel = downloadedViewModel
         binding.recycler.adapter = adapter
@@ -51,16 +53,10 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
                 adapter?.dataSet = it
             }
         }
-
         setVisibilityGroupListeners()
         return binding.root
     }
 
-
-    override fun onItemDeleteClickListener(itemID: String) {
-        downloadedViewModel.deleteItemDao(itemID)
-        adapter?.notifyDataSetChanged()
-    }
 
     private fun setVisibilityGroupListeners() {
 
@@ -73,7 +69,10 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
             if (it) binding.emptyListGroup.visibility = View.VISIBLE
             else binding.emptyListGroup.visibility = View.INVISIBLE
         })
-
     }
 
+    override fun onItemDeleteClickListener(item: RepositoryDownloadedEntity) {
+        downloadedViewModel.deleteItemDao(item)
+        adapter?.notifyDataSetChanged()
+    }
 }

@@ -38,7 +38,11 @@ class MainRepository @Inject constructor(
         repositoryDao.addDownloadedRepository(item)
     }
 
-    fun deleteItemDao(item: RepositoryDownloadedEntity) {
+    suspend fun deleteItemDao(item: RepositoryDownloadedEntity) {
         repositoryDao.deleteDownloadedRepository(item)
+    }
+
+    suspend fun deleteAllDownloaded() {
+        repositoryDao.deleteAllDownloaded()
     }
 }

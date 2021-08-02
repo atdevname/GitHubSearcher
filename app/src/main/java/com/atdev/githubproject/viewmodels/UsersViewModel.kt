@@ -62,22 +62,10 @@ class UsersViewModel @Inject constructor(
     val groupNotFoundVisibility: LiveData<Boolean> = responseEmpty.map { it == true }
     val recyclerVisibility: LiveData<Boolean> = repositoryList.map { !it.isNullOrEmpty() }
 
-    fun addItemInDao(itemId: String) {
-        val item = repositoryList.value?.find { item -> item.id == itemId }
+    fun addItemInDao(item: RepositoryObjectDto) {
         viewModelScope.launch(Dispatchers.IO) {
             mainRepository.addItemInDao(mainRepository.transformItemInDao(item))
         }
-    }
-
-    fun resetStatusAdded(itemId: String) {
-        val item = repositoryList.value?.find { item -> item.id == itemId }
-        item?.added = false
-    }
-
-    fun clearFoundList() {
-        repositoryList.postValue(ArrayList())
-        responseEmpty.postValue(false)
-        notifyDataSetChanged?.invoke()
     }
 
     var notifyDataSetChanged: (() -> Unit)? = null

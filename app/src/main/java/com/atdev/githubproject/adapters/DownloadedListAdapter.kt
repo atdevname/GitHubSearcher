@@ -43,7 +43,7 @@ class DownloadedListAdapter(
             }
 
             delete.setOnClickListener {
-                listener.onItemDeleteClickListener(dataSet[absoluteAdapterPosition].id)
+                listener.onItemDeleteClickListener(dataSet[absoluteAdapterPosition])
             }
 
         }

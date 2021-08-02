@@ -13,7 +13,7 @@ interface RepositoryDao {
     fun getAllDownloadedRepository(): Flow<List<RepositoryDownloadedEntity>>
 
     @Delete
-    fun deleteDownloadedRepository(item: RepositoryDownloadedEntity)
+    suspend fun deleteDownloadedRepository(item: RepositoryDownloadedEntity)
 
     @Query("DELETE FROM downloaded_table")
     suspend fun deleteAllDownloaded()

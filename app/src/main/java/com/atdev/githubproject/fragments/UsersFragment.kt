@@ -1,7 +1,6 @@
 package com.atdev.githubproject.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.atdev.githubproject.adapters.SearchUsersAdapter
 import com.atdev.githubproject.databinding.FragmentUsersBinding
 import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.listeners.AdapterItemClickListener
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.viewmodels.SharedViewModel
 import com.atdev.githubproject.viewmodels.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +47,7 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
 
         usersViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
 
-        (requireActivity() as MainActivity).hideOptionMenu()
+        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         setupObservers()
         setVisibilityGroupListeners()
@@ -78,8 +78,8 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
         })
     }
 
-    override fun onItemAddClickListener(itemID: String) {
-        usersViewModel.addItemInDao(itemID)
+    override fun onItemAddClickListener(item: RepositoryObjectDto) {
+        usersViewModel.addItemInDao(item)
     }
 
     private fun setVisibilityGroupListeners() {

@@ -1,9 +1,12 @@
 package com.atdev.githubproject.listeners
 
+import com.atdev.githubproject.model.RepositoryObjectDto
+import com.atdev.githubproject.room.RepositoryDownloadedEntity
+
 interface AdapterItemClickListener {
-    fun onItemAddClickListener(itemID:String)
+    fun onItemAddClickListener(item:RepositoryObjectDto)
 }
 
 interface AdapterDeleteItemClickListener {
-    fun onItemDeleteClickListener(itemID:String)
+    fun onItemDeleteClickListener(item:RepositoryDownloadedEntity)
 }

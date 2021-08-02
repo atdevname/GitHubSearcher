@@ -16,6 +16,7 @@ import com.atdev.githubproject.adapters.SearchRepositoryAdapter
 import com.atdev.githubproject.databinding.FragmentRepositoryBinding
 import com.atdev.githubproject.helpers.ViewModelEvent
 import com.atdev.githubproject.listeners.AdapterItemClickListener
+import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
 import com.atdev.githubproject.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,6 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
             false
         )
 
-
         binding.viewModel = repositoryViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
@@ -50,7 +50,7 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
             adapter?.notifyDataSetChanged()
         }
 
-        (requireActivity() as MainActivity).hideOptionMenu()
+        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         setupObservers()
         setVisibilityGroupListeners()
@@ -73,8 +73,8 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
 
     }
 
-    override fun onItemAddClickListener(itemID: String) {
-        repositoryViewModel.addItemInDao(itemID)
+    override fun onItemAddClickListener(item: RepositoryObjectDto) {
+        repositoryViewModel.addItemInDao(item)
     }
 
     private fun setVisibilityGroupListeners() {
