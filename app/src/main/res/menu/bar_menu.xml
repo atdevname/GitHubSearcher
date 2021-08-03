@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/users_nav"
-        android:icon="@drawable/ic_baseline_supervisor_account_24"
-        android:title="@string/users_item_menu" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/profile_item_menu" />
     <item
         android:id="@+id/repository_nav"
         android:icon="@drawable/ic_baseline_account_tree_24"
-        android:title="@string/repository_item_menu" />
+        android:title="@string/search_item_menu" />
     <item
         android:id="@+id/collection_nav"
         android:icon="@drawable/ic_baseline_cloud_download_24"

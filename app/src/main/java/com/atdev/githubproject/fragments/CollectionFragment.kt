@@ -14,7 +14,7 @@ import com.atdev.githubproject.MainActivity
 import com.atdev.githubproject.adapters.DownloadedListAdapter
 import com.atdev.githubproject.databinding.FragmentCollectionBinding
 import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
-import com.atdev.githubproject.room.RepositoryCollectionEntity
+import com.atdev.githubproject.model.RepositoryCollectionEntity
 import com.atdev.githubproject.viewmodels.CollectionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

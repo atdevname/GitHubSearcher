@@ -2,7 +2,7 @@ package com.atdev.githubproject.viewmodels
 
 import androidx.lifecycle.*
 import com.atdev.githubproject.MainRepository
-import com.atdev.githubproject.room.RepositoryCollectionEntity
+import com.atdev.githubproject.model.RepositoryCollectionEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

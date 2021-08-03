@@ -1,6 +1,7 @@
 package com.atdev.githubproject.room
 
 import androidx.room.*
+import com.atdev.githubproject.model.RepositoryCollectionEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

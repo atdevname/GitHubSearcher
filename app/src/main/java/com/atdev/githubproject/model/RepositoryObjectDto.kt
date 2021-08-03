@@ -1,6 +1,5 @@
 package com.atdev.githubproject.model
 
-import com.atdev.githubproject.room.RepositoryCollectionEntity
 import java.util.*
 
 data class RepositorySearchResult(var items: List<RepositoryObjectDto>)

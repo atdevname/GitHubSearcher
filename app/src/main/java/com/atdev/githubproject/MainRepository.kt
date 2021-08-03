@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.api.ApiService
 import com.atdev.githubproject.datasource.RepositoryPagingDataSource
+import com.atdev.githubproject.model.RepositoryCollectionEntity
 import com.atdev.githubproject.room.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -13,7 +13,6 @@ class NetworkConnectionInterceptor(private val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isConnected) {
             throw NoConnectivityException()
-            // Throwing our custom exception 'NoConnectivityException'
         }
         val builder: Request.Builder = chain.request().newBuilder()
         return chain.proceed(builder.build())

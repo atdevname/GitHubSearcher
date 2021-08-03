@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
-import com.atdev.githubproject.room.RepositoryCollectionEntity
+import com.atdev.githubproject.model.RepositoryCollectionEntity
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 

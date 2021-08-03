@@ -1,4 +1,4 @@
-package com.atdev.githubproject.room
+package com.atdev.githubproject.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

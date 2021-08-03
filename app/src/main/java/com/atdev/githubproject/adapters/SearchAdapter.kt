@@ -70,10 +70,10 @@ class SearchAdapter(
             holder.watchers.text = repo.watchers_count
             holder.forks.text = repo.forks_count
 
-            if (repo.language!!.isNotEmpty()) {
-                holder.language.visibility = View.VISIBLE
-                holder.language.text = repo.language
-            }
+//            if (repo.language!!.isNotEmpty()) {
+//                holder.language.visibility = View.VISIBLE
+//                holder.language.text = repo.language
+//            }
 
             Picasso.get().load(repo.owner.avatar_url).noFade().fit()
                 .into(holder.profileImage)
