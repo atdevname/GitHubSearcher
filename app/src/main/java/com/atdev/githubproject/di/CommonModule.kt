@@ -39,7 +39,6 @@ class CommonModule {
             .create(ApiService::class.java)
     }
 
-
     @Singleton
     @Provides
     fun provideDatabase(application: Application) = RepositoryDatabase.getDatabase(application)
