@@ -43,6 +43,7 @@ class SearchAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
+        val owner:TextView = view.findViewById(R.id.owner)
         val watchers: TextView = view.findViewById(R.id.watchers)
         var forks: TextView = view.findViewById(R.id.forks)
         var language: TextView = view.findViewById(R.id.language)
@@ -64,16 +65,14 @@ class SearchAdapter(
         if (repo != null) {
 
             holder.name.text = repo.name
-
-            holder.name.text = repo.name
-
+            holder.owner.text = repo.owner.login
             holder.watchers.text = repo.watchers_count
             holder.forks.text = repo.forks_count
 
-//            if (repo.language!!.isNotEmpty()) {
-//                holder.language.visibility = View.VISIBLE
-//                holder.language.text = repo.language
-//            }
+            if (repo.language!!.isNotEmpty()) {
+                holder.language.visibility = View.VISIBLE
+                holder.language.text = repo.language
+            }
 
             Picasso.get().load(repo.owner.avatar_url).noFade().fit()
                 .into(holder.profileImage)

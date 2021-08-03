@@ -34,6 +34,16 @@
         <item name="cornerSize">20%</item>
     </style>
 
+    <style name="ProfileEditTextTheme">
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/gray_dark</item>
+
+
+    </style>
+
     <style name="UserByFieldStyle">
         <item name="android:fontFamily">@font/lexendmedium</item>
         <item name="android:textColor">@color/white</item>

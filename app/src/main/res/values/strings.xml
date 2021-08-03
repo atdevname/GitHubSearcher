@@ -7,4 +7,7 @@
     <string name="profile_item_menu">Profile</string>
     <string name="search_item_menu">Search</string>
     <string name="collection_item_menu">Collection</string>
+    <string name="sign_in">Sign in</string>
+    <string name="password_hint">password</string>
+    <string name="e_mail_hint">e-mail</string>
 </resources>

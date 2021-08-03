@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.api.ApiService
+import com.atdev.githubproject.api.NetworkConnectionInterceptor
 import com.atdev.githubproject.api.NoConnectivityException
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -37,7 +38,7 @@ class RepositoryPagingDataSource(
                         } else {
                             LoadResult.Error(HttpException(response))
                         }
-                    } catch (e: HttpException) {
+                    } catch (e: NoConnectivityException) {
                         return@async LoadResult.Error(e)
                     }
                 }

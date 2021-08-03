@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionBar() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.users_nav,
-                R.id.repository_nav,
+                R.id.profile_nav,
+                R.id.search_nav,
                 R.id.collection_nav,
             )
         )
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (navController.currentDestination?.id != R.id.collection_nav) {
+        if (navController.currentDestination?.id == R.id.search_nav) {
             menuInflater.inflate(R.menu.search_menu, menu)
             activateToolbarSearch(menu)
             return true
@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun activateToolbarSearch(menu: Menu) {
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.queryHint = "Search by name"
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.action_search).actionView as SearchView).apply {

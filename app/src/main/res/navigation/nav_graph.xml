@@ -2,19 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/users_nav">
+    app:startDestination="@id/profile_nav">
 
     <fragment
-        android:id="@+id/users_nav"
+        android:id="@+id/profile_nav"
         android:name="com.atdev.githubproject.fragments.ProfileFragment"
-        android:label="By user"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile">
     </fragment>
 
     <fragment
-        android:id="@+id/repository_nav"
+        android:id="@+id/search_nav"
         android:name="com.atdev.githubproject.fragments.SearchFragment"
-        android:label="By name"
+        android:label="Search"
         tools:layout="@layout/fragment_search">
 
     </fragment>
