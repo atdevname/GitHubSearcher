@@ -10,25 +10,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atdev.githubproject.R
-import com.atdev.githubproject.activity.MainActivity
+import com.atdev.githubproject.MainActivity
 import com.atdev.githubproject.adapters.DownloadedListAdapter
-import com.atdev.githubproject.databinding.FragmentDownloadedBinding
+import com.atdev.githubproject.databinding.FragmentCollectionBinding
 import com.atdev.githubproject.listeners.AdapterDeleteItemClickListener
-import com.atdev.githubproject.model.RepositoryObjectDto
-import com.atdev.githubproject.room.RepositoryDownloadedEntity
-import com.atdev.githubproject.viewmodels.DownloadedViewModel
+import com.atdev.githubproject.room.RepositoryCollectionEntity
+import com.atdev.githubproject.viewmodels.CollectionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
-class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
+class CollectionFragment : Fragment(), AdapterDeleteItemClickListener {
 
-    private lateinit var binding: FragmentDownloadedBinding
+    private lateinit var binding: FragmentCollectionBinding
 
-    private val downloadedViewModel: DownloadedViewModel by viewModels()
+    private val collectionViewModel: CollectionViewModel by viewModels()
 
     private val adapter by lazy { activity?.let { DownloadedListAdapter(this) } }
 
@@ -38,18 +36,18 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_downloaded,
+            R.layout.fragment_collection,
             container,
             false
         )
         (requireActivity() as MainActivity).invalidateOptionsMenu()
 
-        binding.viewModel = downloadedViewModel
+        binding.viewModel = collectionViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         lifecycleScope.launch(Dispatchers.Main) {
-            downloadedViewModel.downloadedListRepositoryEntity.collect {
+            collectionViewModel.downloadedListRepositoryEntity.collect {
                 adapter?.dataSet = it
             }
         }
@@ -62,19 +60,19 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
 
     private fun setVisibilityGroupListeners() {
 
-        downloadedViewModel.recyclerVisibility.observe(viewLifecycleOwner, {
+        collectionViewModel.recyclerVisibility.observe(viewLifecycleOwner, {
             if (it) binding.recycler.visibility = View.VISIBLE
             else binding.recycler.visibility = View.INVISIBLE
         })
 
-        downloadedViewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
+        collectionViewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
             if (it) binding.emptyListGroup.visibility = View.VISIBLE
             else binding.emptyListGroup.visibility = View.INVISIBLE
         })
     }
 
-    override fun onItemDeleteClickListener(item: RepositoryDownloadedEntity) {
-        downloadedViewModel.deleteItemDao(item)
+    override fun onItemDeleteClickListener(item: RepositoryCollectionEntity) {
+        collectionViewModel.deleteItemDao(item)
         adapter?.notifyDataSetChanged()
     }
 }

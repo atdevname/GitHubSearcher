@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [
-    RepositoryDownloadedEntity::class], version = 5, exportSchema = false)
+    RepositoryCollectionEntity::class], version = 5, exportSchema = false)
 abstract class RepositoryDatabase : RoomDatabase() {
 
     abstract fun repositoryDao(): RepositoryDao

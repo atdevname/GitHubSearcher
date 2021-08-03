@@ -1,4 +1,4 @@
-package com.atdev.githubproject.helpers
+package com.atdev.githubproject
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

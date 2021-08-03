@@ -1,4 +1,4 @@
-package com.atdev.githubproject.helpers
+package com.atdev.githubproject.utils
 
 
 class ViewModelEvent<out T>(private val value: T) {

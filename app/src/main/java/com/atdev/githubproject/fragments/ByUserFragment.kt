@@ -10,22 +10,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atdev.githubproject.R
-import com.atdev.githubproject.activity.MainActivity
+import com.atdev.githubproject.MainActivity
 import com.atdev.githubproject.adapters.SearchUsersAdapter
-import com.atdev.githubproject.databinding.FragmentUsersBinding
-import com.atdev.githubproject.helpers.ViewModelEvent
+import com.atdev.githubproject.databinding.FragmentByUserBinding
+import com.atdev.githubproject.utils.ViewModelEvent
 import com.atdev.githubproject.listeners.AdapterItemClickListener
 import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.viewmodels.SharedViewModel
-import com.atdev.githubproject.viewmodels.UsersViewModel
+import com.atdev.githubproject.viewmodels.ByUserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UsersFragment : Fragment(), AdapterItemClickListener {
+class ByUserFragment : Fragment(), AdapterItemClickListener {
 
-    private lateinit var binding: FragmentUsersBinding
+    private lateinit var binding: FragmentByUserBinding
 
-    private val usersViewModel: UsersViewModel by viewModels()
+    private val byUserViewModel: ByUserViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val adapter by lazy { activity?.let { SearchUsersAdapter(this) } }
@@ -36,17 +36,17 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_users,
+            R.layout.fragment_by_user,
             container,
             false
         )
         (requireActivity() as MainActivity).invalidateOptionsMenu()
 
-        binding.viewModel = usersViewModel
+        binding.viewModel = byUserViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        usersViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
+        byUserViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
 
         setupObservers()
         setVisibilityGroupListeners()
@@ -55,19 +55,19 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
     }
 
     private fun setupObservers() {
-        usersViewModel.repositoryList.observe(viewLifecycleOwner, {
+        byUserViewModel.repositoryList.observe(viewLifecycleOwner, {
             adapter?.dataSet = it
         })
 
         sharedViewModel.searchValue.observe(viewLifecycleOwner, { event ->
-            event.getValueOnceOrNull()?.let { usersViewModel.searchByName(it) }
+            event.getValueOnceOrNull()?.let { byUserViewModel.searchByName(it) }
         })
 
-        usersViewModel.networkConnected.observe(viewLifecycleOwner, {
+        byUserViewModel.networkConnected.observe(viewLifecycleOwner, {
             sharedViewModel.networkConnected.postValue(ViewModelEvent(it))
         })
 
-        usersViewModel.foundByField.observe(viewLifecycleOwner, {
+        byUserViewModel.foundByField.observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 binding.userByField.visibility = View.VISIBLE
                 binding.userByField.text = "Found by: $it"
@@ -78,29 +78,17 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
     }
 
     override fun onItemAddClickListener(item: RepositoryObjectDto) {
-        usersViewModel.addItemInDao(item)
+        byUserViewModel.addItemInDao(item)
     }
 
     private fun setVisibilityGroupListeners() {
 
-        usersViewModel.recyclerVisibility.observe(viewLifecycleOwner, {
+        byUserViewModel.recyclerVisibility.observe(viewLifecycleOwner, {
             if (it) binding.recycler.visibility = View.VISIBLE
             else binding.recycler.visibility = View.INVISIBLE
         })
 
-        usersViewModel.groupNotFoundVisibility.observe(viewLifecycleOwner, {
-            if (it) {
-                binding.noFoundGroup.visibility = View.VISIBLE
-                binding.emptyListGroup.visibility = View.INVISIBLE
-            } else binding.noFoundGroup.visibility = View.INVISIBLE
-        })
-
-        usersViewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
-            if (it) binding.emptyListGroup.visibility = View.VISIBLE
-            else binding.emptyListGroup.visibility = View.INVISIBLE
-        })
-
-        usersViewModel.progressBarVisibility.observe(viewLifecycleOwner, {
+        byUserViewModel.progressBarVisibility.observe(viewLifecycleOwner, {
             if (it) binding.progressIndicator.visibility = View.VISIBLE
             else binding.progressIndicator.visibility = View.INVISIBLE
         })

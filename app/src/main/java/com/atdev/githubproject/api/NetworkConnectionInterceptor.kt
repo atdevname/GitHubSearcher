@@ -1,4 +1,4 @@
-package com.atdev.githubproject.retrofit
+package com.atdev.githubproject.api
 
 import android.content.Context
 import android.net.ConnectivityManager

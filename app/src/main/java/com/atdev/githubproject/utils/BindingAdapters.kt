@@ -1,4 +1,4 @@
-package com.atdev.githubproject.helpers
+package com.atdev.githubproject.utils
 
 import android.view.View
 import android.view.animation.AlphaAnimation

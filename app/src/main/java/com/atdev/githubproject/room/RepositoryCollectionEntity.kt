@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "downloaded_table")
-data class RepositoryDownloadedEntity(
+data class RepositoryCollectionEntity(
 
     @ColumnInfo(name = "name_cl")
     var name: String,

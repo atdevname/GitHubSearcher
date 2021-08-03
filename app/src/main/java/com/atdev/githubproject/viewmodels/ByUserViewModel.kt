@@ -1,18 +1,16 @@
 package com.atdev.githubproject.viewmodels
 
 import androidx.lifecycle.*
-import com.atdev.githubproject.helpers.MainRepository
+import com.atdev.githubproject.MainRepository
 import com.atdev.githubproject.model.RepositoryObjectDto
-import com.atdev.githubproject.retrofit.NoConnectivityException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class UsersViewModel @Inject constructor(
+class ByUserViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
@@ -24,35 +22,7 @@ class UsersViewModel @Inject constructor(
 
     var foundByField = MutableLiveData("")
 
-    private fun getSearchResult(value: String) {
-        job = viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    _progressBarVisibility.postValue(true)
-                    val response = mainRepository.getSearchUser(value)
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            repositoryList.postValue(it)
-                            if (response.body()!!.isNotEmpty()) {
-                                responseEmpty.postValue(false)
-                                foundByField.postValue(value)
-                            } else {
-                                responseEmpty.postValue(true)
-                            }
-                        }
-                    } else {
-                        job?.cancel()
-                    }
-                } catch (e: NoConnectivityException) {
-                    networkConnected.postValue(false)
-                }
-            }
-            _progressBarVisibility.postValue(false)
-        }
-    }
-
     fun searchByName(value: String) {
-        getSearchResult(value)
     }
 
     private val _progressBarVisibility = MutableLiveData<Boolean>(false)
