@@ -40,14 +40,13 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
             container,
             false
         )
+        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         binding.viewModel = usersViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         usersViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
-
-        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         setupObservers()
         setVisibilityGroupListeners()
@@ -65,7 +64,7 @@ class UsersFragment : Fragment(), AdapterItemClickListener {
         })
 
         usersViewModel.networkConnected.observe(viewLifecycleOwner, {
-            sharedViewModel.setNetworkConnected(ViewModelEvent(it))
+            sharedViewModel.networkConnected.postValue(ViewModelEvent(it))
         })
 
         usersViewModel.foundByField.observe(viewLifecycleOwner, {

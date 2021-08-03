@@ -53,7 +53,9 @@ class DownloadedFragment : Fragment(), AdapterDeleteItemClickListener {
                 adapter?.dataSet = it
             }
         }
+
         setVisibilityGroupListeners()
+
         return binding.root
     }
 

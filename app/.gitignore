@@ -1,1 +1,8 @@
 /build
+.gradle
+.DS_Store
+.idea
+/captures
+.externalNativeBuild
+.Useful.kt
+.gitignore

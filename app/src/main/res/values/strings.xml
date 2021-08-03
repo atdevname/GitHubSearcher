@@ -4,7 +4,6 @@
     <string name="no_found">No found</string>
     <string name="there_is_empty">There is empty</string>
 
-    <string name="clearList_item_menu">Clear list</string>
     <string name="users_item_menu">Users</string>
     <string name="repository_item_menu">Repository</string>
     <string name="collection_item_menu">Collection</string>

@@ -41,16 +41,13 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
             container,
             false
         )
+        (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         binding.viewModel = repositoryViewModel
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        repositoryViewModel.notifyDataSetChanged = {
-            adapter?.notifyDataSetChanged()
-        }
-
-        (requireActivity() as MainActivity).invalidateOptionsMenu()
+        repositoryViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
 
         setupObservers()
         setVisibilityGroupListeners()
@@ -64,7 +61,7 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
         })
 
         repositoryViewModel.networkConnected.observe(viewLifecycleOwner, {
-            sharedViewModel.setNetworkConnected(ViewModelEvent(it))
+            sharedViewModel.networkConnected.postValue(ViewModelEvent(it))
         })
 
         sharedViewModel.searchValue.observe(viewLifecycleOwner, { event ->
@@ -80,13 +77,11 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
     private fun setVisibilityGroupListeners() {
 
         repositoryViewModel.recyclerVisibility.observe(viewLifecycleOwner, {
-            Log.i("TEST_REC", "$it")
             if (it) binding.recycler.visibility = View.VISIBLE
             else binding.recycler.visibility = View.INVISIBLE
         })
 
         repositoryViewModel.groupNotFoundVisibility.observe(viewLifecycleOwner, {
-            Log.i("TEST_FOUND", "$it")
             if (it) {
                 binding.noFoundGroup.visibility = View.VISIBLE
                 binding.emptyListGroup.visibility = View.INVISIBLE
@@ -94,13 +89,11 @@ class RepositoryFragment : Fragment(), AdapterItemClickListener {
         })
 
         repositoryViewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
-            Log.i("TEST_EMPTY", "$it")
             if (it) binding.emptyListGroup.visibility = View.VISIBLE
             else binding.emptyListGroup.visibility = View.INVISIBLE
         })
 
         repositoryViewModel.progressBarVisibility.observe(viewLifecycleOwner, {
-            Log.i("TEST_REC", "$it")
             if (it) binding.progressIndicator.visibility = View.VISIBLE
             else binding.progressIndicator.visibility = View.INVISIBLE
         })

@@ -62,7 +62,7 @@ class RepositoryViewModel @Inject constructor(
 
     fun addItemInDao(item: RepositoryObjectDto) {
         viewModelScope.launch(Dispatchers.IO) {
-            mainRepository.addItemInDao(mainRepository.transformItemInDao(item))
+            mainRepository.addItemInDao(item.transformItemInDao())
         }
     }
 
