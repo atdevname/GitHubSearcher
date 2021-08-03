@@ -6,23 +6,23 @@
 
     <fragment
         android:id="@+id/users_nav"
-        android:name="com.atdev.githubproject.fragments.UsersFragment"
-        android:label="By users"
-        tools:layout="@layout/fragment_users">
+        android:name="com.atdev.githubproject.fragments.ProfileFragment"
+        android:label="By user"
+        tools:layout="@layout/fragment_profile">
     </fragment>
 
     <fragment
         android:id="@+id/repository_nav"
-        android:name="com.atdev.githubproject.fragments.RepositoryFragment"
+        android:name="com.atdev.githubproject.fragments.SearchFragment"
         android:label="By name"
-        tools:layout="@layout/fragment_repository">
+        tools:layout="@layout/fragment_search">
 
     </fragment>
     <fragment
         android:id="@+id/collection_nav"
-        android:name="com.atdev.githubproject.fragments.DownloadedFragment"
+        android:name="com.atdev.githubproject.fragments.CollectionFragment"
         android:label="Collection"
-        tools:layout="@layout/fragment_downloaded">
+        tools:layout="@layout/fragment_collection">
     </fragment>
 
 </navigation>

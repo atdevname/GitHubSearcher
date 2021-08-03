@@ -1,6 +1,5 @@
 package com.atdev.githubproject.model
 
-import com.atdev.githubproject.room.RepositoryDownloadedEntity
 import java.util.*
 
 data class RepositorySearchResult(var items: List<RepositoryObjectDto>)
@@ -15,8 +14,8 @@ data class RepositoryObjectDto(
     var added: Boolean = false,
     val id: String = UUID.randomUUID().toString(),
 ){
-    fun transformItemInDao(): RepositoryDownloadedEntity {
-        return RepositoryDownloadedEntity(
+    fun transformItemInDao(): RepositoryCollectionEntity {
+        return RepositoryCollectionEntity(
             this.name,
             this.owner.login,
             this.owner.avatar_url,

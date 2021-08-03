@@ -1,11 +1,11 @@
-package com.atdev.githubproject.room
+package com.atdev.githubproject.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "downloaded_table")
-data class RepositoryDownloadedEntity(
+data class RepositoryCollectionEntity(
 
     @ColumnInfo(name = "name_cl")
     var name: String,

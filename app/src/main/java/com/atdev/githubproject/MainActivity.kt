@@ -1,4 +1,4 @@
-package com.atdev.githubproject.activity
+package com.atdev.githubproject
 
 import android.app.Activity
 import android.app.SearchManager
@@ -16,13 +16,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.atdev.githubproject.R
 import com.atdev.githubproject.databinding.ActivityMainBinding
-import com.atdev.githubproject.helpers.ViewModelEvent
+import com.atdev.githubproject.utils.ViewModelEvent
 import com.atdev.githubproject.viewmodels.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -96,6 +94,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     sharedViewModel.searchValue.postValue(ViewModelEvent(query))
                     hideKeyboard()
+
                     return true
                 }
             }
@@ -103,8 +102,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        return true
+        return when (item.itemId) {
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun invalidateOptionsMenu() {

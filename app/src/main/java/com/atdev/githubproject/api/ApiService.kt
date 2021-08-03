@@ -1,4 +1,4 @@
-package com.atdev.githubproject.retrofit
+package com.atdev.githubproject.api
 
 import com.atdev.githubproject.model.RepositoryObjectDto
 import com.atdev.githubproject.model.RepositorySearchResult
