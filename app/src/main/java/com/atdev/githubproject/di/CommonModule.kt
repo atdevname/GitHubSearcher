@@ -26,8 +26,8 @@ class CommonModule {
     @Provides
     fun provideRetrofitService(@ApplicationContext context: Context): ApiService {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(45, TimeUnit.SECONDS)
             .addInterceptor(NetworkConnectionInterceptor(context))
             .build()
 
@@ -38,7 +38,6 @@ class CommonModule {
             ).client(okHttpClient).build()
             .create(ApiService::class.java)
     }
-
 
     @Singleton
     @Provides

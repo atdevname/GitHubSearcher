@@ -3,14 +3,12 @@ package com.atdev.githubproject.activity
 import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
-import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.SearchRecentSuggestions
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import android.widget.CursorAdapter
-import android.widget.SimpleCursorAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -23,7 +21,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.atdev.githubproject.R
 import com.atdev.githubproject.databinding.ActivityMainBinding
 import com.atdev.githubproject.helpers.ViewModelEvent
-import com.atdev.githubproject.providers.LastResultProvider
 import com.atdev.githubproject.viewmodels.RepositoryViewModel
 import com.atdev.githubproject.viewmodels.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -37,8 +34,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val navController: NavController by lazy { findNavController(R.id.nav_host_fragment) }
-
-    private val repositoryViewModel: RepositoryViewModel by viewModels()
 
     private val sharedViewModel:SharedViewModel by viewModels()
 
@@ -80,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (navController.currentDestination?.id != R.id.collection_nav) {
-            menuInflater.inflate(R.menu.main_menu, menu)
+            menuInflater.inflate(R.menu.search_menu, menu)
             activateToolbarSearch(menu)
             return true
         }
@@ -110,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                         LastResultProvider.AUTHORITY,
                         LastResultProvider.MODE
                     ).saveRecentQuery(query, null)
+                    Log.i("TEST!",query)
 
                     return true
                 }
@@ -120,14 +116,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_clearList -> {
+                repositoryViewModel.clearFoundList()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    fun hideOptionMenu() {
-        invalidateOptionsMenu()
+    override fun invalidateOptionsMenu() {
+        super.invalidateOptionsMenu()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -41,7 +41,7 @@ class SearchUsersAdapter(
             }
 
             add.setOnClickListener {
-             //   listener.onItemAddClickListener(dataSet[absoluteAdapterPosition].id)
+                listener.onItemAddClickListener(dataSet[absoluteAdapterPosition])
                 dataSet[absoluteAdapterPosition].added = true
                 add.setBackgroundResource(R.drawable.ic_baseline_done_24)
             }

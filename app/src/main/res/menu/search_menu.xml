@@ -4,11 +4,6 @@
     tools:context="com.atdev.githubproject.activity.MainActivity">
 
     <item
-        android:id="@+id/action_clearList"
-        android:title="@string/clearList_item_menu"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="collapseActionView|ifRoom"

@@ -34,24 +34,15 @@ class MainRepository @Inject constructor(
 
     fun getAllDownloadedRepository(): Flow<List<RepositoryDownloadedEntity>> = repositoryDao.getAllDownloadedRepository()
 
-    fun transformItemInDao(item: RepositoryObjectDto?): RepositoryDownloadedEntity {
-        return RepositoryDownloadedEntity(
-            item!!.name,
-            item.owner.login,
-            item.owner.avatar_url,
-            item.html_url,
-            item.watchers_count,
-            item.forks_count,
-            item.language,
-            item.id,
-        )
-    }
-
     suspend fun addItemInDao(item: RepositoryDownloadedEntity) {
         repositoryDao.addDownloadedRepository(item)
     }
 
-    fun deleteItemDao(item: RepositoryDownloadedEntity) {
+    suspend fun deleteItemDao(item: RepositoryDownloadedEntity) {
         repositoryDao.deleteDownloadedRepository(item)
+    }
+
+    suspend fun deleteAllDownloaded() {
+        repositoryDao.deleteAllDownloaded()
     }
 }

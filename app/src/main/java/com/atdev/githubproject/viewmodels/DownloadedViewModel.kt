@@ -17,20 +17,20 @@ class DownloadedViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    val downloadedListRepositoryEntity: Flow<List<RepositoryDownloadedEntity>> = mainRepository.getAllDownloadedRepository()
+    val downloadedListRepositoryEntity: Flow<List<RepositoryDownloadedEntity>> =
+        mainRepository.getAllDownloadedRepository()
 
-    fun deleteItemDao(itemId: String) {
+    fun deleteItemDao(item: RepositoryDownloadedEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            downloadedListRepositoryEntity.map { it.find { item -> item.id == itemId } }
-                .filterNotNull().collect {
-                    mainRepository.deleteItemDao(it)
-                }
+            mainRepository.deleteItemDao(item)
         }
     }
 
     val groupEmptyListVisibility: LiveData<Boolean> =
-        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext).map { it.isEmpty() }
+        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext)
+            .map { it.isEmpty() }
     val recyclerVisibility: LiveData<Boolean> =
-        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext).map { !it.isNullOrEmpty() }
+        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext)
+            .map { !it.isNullOrEmpty() }
 
 }

@@ -4,6 +4,7 @@
     <color name="gray_middle">#51595C</color>
     <color name="gray_light">#546878</color>
     <color name="beigeColor">#f4cab1</color>
+    <color name="blue_light_card">#E8EBF4</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 </resources>
