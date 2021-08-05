@@ -23,9 +23,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
-            android:layout_width="110dp"
-            android:layout_height="98dp"
-            android:layout_marginTop="44dp"
+            android:layout_width="189dp"
+            android:layout_height="169dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/ic_iconmonstr"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -37,21 +37,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="Hello!"
-            android:textColor="@color/white"
-            android:textSize="45sp"
+            android:text="Hello Friend!"
+            android:textColor="@color/blue_light_card"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/username"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.534" />
+            app:layout_constraintVertical_bias="0.304" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/helloView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Get start with Searcher"
+            android:textColor="@color/blue_light_card"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.638" />
 
         <EditText
             android:id="@+id/username"
             style="@style/SignInEditTextTheme"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginTop="176dp"
+            android:layout_marginTop="204dp"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
@@ -66,7 +82,7 @@
             style="@style/SignInEditTextTheme"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionDone"
@@ -79,7 +95,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -87,7 +103,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="64dp"
             android:background="@drawable/signin_button"
-            android:enabled="false"
+            android:enabled="true"
+            android:elevation="10dp"
             android:text="@string/sign_in"
             android:textColor="@color/gray_light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -95,7 +112,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password"
-            app:layout_constraintVertical_bias="0.319" />
+            app:layout_constraintVertical_bias="0.29" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
@@ -107,10 +124,9 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login"
-            app:layout_constraintVertical_bias="0.875" />
+            app:layout_constraintVertical_bias="0.917" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/loading"

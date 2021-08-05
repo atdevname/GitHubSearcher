@@ -25,13 +25,17 @@
     </style>
 
     <style name="CardViewTheme">
-        <item name="cardCornerRadius">8dp</item>
-        <item name="cardBackgroundColor">@color/blue_light_card</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:background">@drawable/card_view</item>
+        <item name="android:layout_marginStart">6dp</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:layout_marginTop">6dp</item>
     </style>
 
     <style name="RoundedImageViewTheme">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20%</item>
+<!--        <item name="cornerFamily">rounded</item>-->
+<!--        <item name="cornerSize">20%</item>-->
     </style>
 
     <style name="SignInEditTextTheme">
@@ -68,19 +72,19 @@
         <item name="android:padding">@dimen/smallPadding</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/gray_light</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="RepositoryNameFieldStyle" parent="OwnerTextFieldStyle">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/gray_dark</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
     <style name="RepositoryDataFieldStyle" parent="OwnerTextFieldStyle">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Theme.GitHubProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

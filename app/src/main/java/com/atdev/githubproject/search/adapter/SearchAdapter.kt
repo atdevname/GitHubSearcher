@@ -74,7 +74,7 @@ class SearchAdapter(
                 holder.language.text = repo.language
             }
 
-            Picasso.get().load(repo.owner.avatar_url).noFade().fit()
+            Picasso.get().load(repo.owner.avatar_url).noFade().fit().centerCrop()
                 .into(holder.profileImage)
 
             ///Переделать
@@ -86,7 +86,6 @@ class SearchAdapter(
         }
     }
 }
-
 
 class FooterAdapter(val retry: () -> Unit) : LoadStateAdapter<FooterAdapter.ViewHolder>() {
 

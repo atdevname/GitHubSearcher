@@ -4,11 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/card_view.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/edit_text.xml" value="0.22828947368421051" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/github_button.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_call_split_24.xml" value="0.225" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_done_24.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_remove_from_queue_24.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_iconmonstr.xml" value="0.22828947368421051" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_user.xml" value="0.225" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/inside_cardview.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/signin_button.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/splash_background.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.2703125" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/activity_main.xml" value="0.21546052631578946" />
@@ -16,6 +27,9 @@
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_collection.xml" value="0.21217105263157895" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_profile.xml" value="0.21546052631578946" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_search.xml" value="0.21546052631578946" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/list_item_collection_repository.xml" value="0.25" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/list_item_downloaded_repository.xml" value="0.21217105263157895" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/list_item_search_repository.xml" value="0.33" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/menu/bar_menu.xml" value="0.21546052631578946" />
       </map>
     </option>
