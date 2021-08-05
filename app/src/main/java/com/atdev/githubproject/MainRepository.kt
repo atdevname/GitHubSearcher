@@ -3,11 +3,11 @@ package com.atdev.githubproject
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.atdev.githubproject.model.RepositoryObjectDto
-import com.atdev.githubproject.api.ApiService
-import com.atdev.githubproject.datasource.RepositoryPagingDataSource
-import com.atdev.githubproject.model.RepositoryCollectionEntity
-import com.atdev.githubproject.room.*
+import com.atdev.githubproject.search.model.RepositoryObjectDto
+import com.atdev.githubproject.search.api.ApiService
+import com.atdev.githubproject.search.datasource.RepositoryPagingDataSource
+import com.atdev.githubproject.search.model.RepositoryCollectionEntity
+import com.atdev.githubproject.collection.room.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

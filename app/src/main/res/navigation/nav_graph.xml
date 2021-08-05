@@ -2,27 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/profile_nav">
+    app:startDestination="@id/profile_fragment">
 
     <fragment
-        android:id="@+id/profile_nav"
-        android:name="com.atdev.githubproject.fragments.ProfileFragment"
+        android:id="@+id/profile_fragment"
+        android:name="com.atdev.githubproject.profile.fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
     </fragment>
 
     <fragment
-        android:id="@+id/search_nav"
-        android:name="com.atdev.githubproject.fragments.SearchFragment"
+        android:id="@+id/search_fragment"
+        android:name="com.atdev.githubproject.search.fragment.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search">
 
     </fragment>
+
     <fragment
-        android:id="@+id/collection_nav"
-        android:name="com.atdev.githubproject.fragments.CollectionFragment"
+        android:id="@+id/collection_fragment"
+        android:name="com.atdev.githubproject.collection.fragment.CollectionFragment"
         android:label="Collection"
         tools:layout="@layout/fragment_collection">
     </fragment>
+
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.atdev.githubproject.profile.auth.activity.LoginActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_login" />
 
 </navigation>
