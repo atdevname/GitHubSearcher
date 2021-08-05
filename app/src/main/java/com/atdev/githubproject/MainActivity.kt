@@ -24,6 +24,11 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+
+
+
 
 /*
 * Пагинация с кэшом
@@ -57,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         setupActionBar()
-
         networkObservers()
     }
 
@@ -69,10 +73,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.profile_fragment,
                 R.id.search_fragment,
+                R.id.profile_fragment,
                 R.id.collection_fragment,
             )
         )
@@ -83,6 +88,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, _, _ ->
             invalidateOptionsMenu()
         }
+
+        binding.bottomNavigatinView.selectedItemId = R.id.search_fragment
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

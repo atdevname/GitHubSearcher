@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/profileLayout"
-        android:background="@color/gray_dark">
+        android:background="@color/gray_light">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
@@ -34,7 +34,7 @@
             android:layout_marginTop="36dp"
             android:background="@null"
             android:enabled="false"
-            android:text="@{viewModel.username}"
+            android:text="John"
             android:textSize="45sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,35 +48,61 @@
             style="@style/ProfileTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:background="@null"
             android:enabled="false"
             android:inputType="text"
-            android:text="@{viewModel.secondName}"
+            android:text="Doe"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username"
             tools:text="Doe" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/themeText"
+            style="@style/ProfileTextTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="172dp"
+            android:background="@null"
+            android:enabled="false"
+            android:inputType="text"
+            android:text="Dark Theme"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            app:layout_constraintBottom_toBottomOf="@+id/themeText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/themeText"
+            app:layout_constraintVertical_bias="0.38" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
             android:hint="@string/password_hint"
             android:inputType="text"
-            android:text="Logout"
-            android:background="@android:color/transparent"
             android:onClick="@{viewModel::logout}"
+            android:text="Logout"
             android:textColor="@color/beigeColor"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondName"
-            app:layout_constraintVertical_bias="0.945" />
+            app:layout_constraintTop_toBottomOf="@+id/themeText"
+            app:layout_constraintVertical_bias="0.811" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

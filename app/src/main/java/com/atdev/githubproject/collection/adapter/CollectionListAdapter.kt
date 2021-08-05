@@ -51,14 +51,14 @@ class CollectionListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.list_item_downloaded_repository, viewGroup, false)
+            .inflate(R.layout.list_item_collection_repository, viewGroup, false)
 
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        Picasso.get().load(dataSet[position].avatar_url).noFade().fit()
+        Picasso.get().load(dataSet[position].avatar_url).noFade().fit().centerCrop()
             .into(viewHolder.profileImage)
 
         viewHolder.owner.text = dataSet[position].owner_login
