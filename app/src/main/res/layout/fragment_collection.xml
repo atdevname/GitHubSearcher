@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.atdev.githubproject.viewmodels.CollectionViewModel" />
+            type="com.atdev.githubproject.collection.viewmodel.CollectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

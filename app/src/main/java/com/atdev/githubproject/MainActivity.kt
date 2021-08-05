@@ -17,11 +17,23 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.atdev.githubproject.databinding.ActivityMainBinding
-import com.atdev.githubproject.utils.ViewModelEvent
-import com.atdev.githubproject.viewmodels.SharedViewModel
+import com.atdev.githubproject.components.router.AppRouter
+import com.atdev.githubproject.components.utils.ViewModelEvent
+import com.atdev.githubproject.components.shareviewmodel.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+/*
+* Пагинация с кэшом
+* Кастомный ресайкл
+* Чистка всего списка в коллекции
+* Сортировка
+* Анимация
+* Темная тема
+* Авторизация через гитхаб и гугл
+* */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -32,11 +44,16 @@ class MainActivity : AppCompatActivity() {
 
     private val sharedViewModel:SharedViewModel by viewModels()
 
+    @Inject
+    lateinit var appRouter: AppRouter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_GitHubProject)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        appRouter.navController = navController
 
         setSupportActionBar(binding.toolbar)
         setupActionBar()
@@ -54,9 +71,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionBar() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.users_nav,
-                R.id.repository_nav,
-                R.id.collection_nav,
+                R.id.profile_fragment,
+                R.id.search_fragment,
+                R.id.collection_fragment,
             )
         )
 
@@ -69,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (navController.currentDestination?.id != R.id.collection_nav) {
+        if (navController.currentDestination?.id == R.id.search_fragment) {
             menuInflater.inflate(R.menu.search_menu, menu)
             activateToolbarSearch(menu)
             return true
@@ -79,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun activateToolbarSearch(menu: Menu) {
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.queryHint = "Search by name"
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.action_search).actionView as SearchView).apply {

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.atdev.githubproject.viewmodels.SearchViewModel" />
+            type="com.atdev.githubproject.search.viewmodel.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +14,10 @@
         android:layout_height="match_parent"
         android:background="@color/gray_dark">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_dark"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
         </androidx.recyclerview.widget.RecyclerView>
@@ -35,6 +32,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:trackColor="@android:color/transparent" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/userByField"-->
+<!--            style="@style/UserByFieldStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.033"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:text="Found by: atdev" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
