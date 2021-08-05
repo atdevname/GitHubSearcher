@@ -45,7 +45,6 @@ class CollectionListAdapter(
             delete.setOnClickListener {
                 listener.onItemDeleteClickListener(dataSet[absoluteAdapterPosition])
             }
-
         }
     }
 
@@ -71,7 +70,6 @@ class CollectionListAdapter(
             viewHolder.language.visibility = View.VISIBLE
             viewHolder.language.text = dataSet[position].language
         }
-
     }
 
     override fun getItemCount() = dataSet.size
