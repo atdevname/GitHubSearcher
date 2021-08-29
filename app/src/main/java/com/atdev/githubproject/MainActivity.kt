@@ -24,12 +24,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
-
-
-
 /*
 * Пагинация с кэшом
 * Кастомный ресайкл
