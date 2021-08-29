@@ -11,6 +11,8 @@ class ProfileViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
     ) : ViewModel() {
 
+    var switchDarkMode =  MutableLiveData<Boolean>(false)
+
     var username = MutableLiveData<String>(loginRepository.user?.displayName)
     var secondName = MutableLiveData<String>()
 

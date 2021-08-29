@@ -13,27 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/profileLayout"
-        android:background="@color/gray_light">
+        android:background="@color/background">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="80dp"
-            android:src="@drawable/ic_iconmonstr"
+            android:src="@drawable/ic_monster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/username"
             style="@style/ProfileTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:background="@null"
-            android:enabled="false"
+            android:textColor="@color/text_color"
             android:text="John"
             android:textSize="45sp"
             android:textStyle="normal"
@@ -43,14 +42,12 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             tools:text="John" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/secondName"
             style="@style/ProfileTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:enabled="false"
-            android:inputType="text"
+            android:textColor="@color/text_color"
             android:text="Doe"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,23 +57,22 @@
             tools:text="Doe" />
 
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/themeText"
             style="@style/ProfileTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="172dp"
-            android:background="@null"
-            android:enabled="false"
-            android:inputType="text"
             android:text="Dark Theme"
             android:textSize="16sp"
+            android:textColor="@color/switch_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.157"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/darkModeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="36dp"
@@ -92,11 +88,10 @@
             android:background="@android:color/transparent"
             android:gravity="center"
             android:hint="@string/password_hint"
-            android:inputType="text"
             android:onClick="@{viewModel::logout}"
             android:text="Logout"
-            android:textColor="@color/beigeColor"
-            android:textSize="18sp"
+            android:textColor="@color/logout_btn"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

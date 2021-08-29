@@ -3,8 +3,22 @@
     <color name="gray_dark">#FF2B3137</color>
     <color name="gray_middle">#51595C</color>
     <color name="gray_light">#546878</color>
-    <color name="beigeColor">#f4cab1</color>
-    <color name="blue_light_card">#E8EBF4</color>
+    <color name="orange_light">#f4cab1</color>
+    <color name="blue_light">#E8EBF4</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="background">@color/blue_light</color>
+    <color name="text_color">@color/gray_dark</color>
+
+    <color name="toolbar">@color/gray_light</color>
+    <color name="bottom_nav_bar">@color/gray_light</color>
+
+    <color name="switch_text">@color/gray_dark</color>
+
+    <color name="logout_btn">@color/gray_dark</color>
+
+    <color name="ic_text_bar">@color/gray_dark</color>
+
+    <color name="logo">@color/gray_dark</color>
 </resources>

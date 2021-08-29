@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         appRouter.navController = navController
 
         setSupportActionBar(binding.toolbar)
-        setupActionBar()
+        setupActionBar(savedInstanceState)
         networkObservers()
     }
 
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupActionBar() {
+    private fun setupActionBar(savedInstanceState: Bundle?) {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             invalidateOptionsMenu()
         }
 
+        if (savedInstanceState == null)
         binding.bottomNavigatinView.selectedItemId = R.id.search_fragment
     }
 

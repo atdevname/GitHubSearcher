@@ -39,10 +39,10 @@
     </style>
 
     <style name="SignInEditTextTheme">
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">left</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:background">@drawable/edit_text</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/blue_light</item>
         <item name="android:textColorHint">@color/gray_light</item>
     </style>
 
@@ -62,7 +62,7 @@
 
     <style name="BackgroundTextStyle">
         <item name="android:fontFamily">@font/lexendmedium</item>
-        <item name="android:textColor">@color/beigeColor</item>
+        <item name="android:textColor">@color/orange_light</item>
         <item name="android:textSize">30sp</item>
     </style>
 
