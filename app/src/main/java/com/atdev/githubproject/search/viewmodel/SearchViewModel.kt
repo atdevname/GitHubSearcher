@@ -29,6 +29,4 @@ class SearchViewModel @Inject constructor(
             mainRepository.addItemInDao(item.transformItemInDao())
         }
     }
-
-    var notifyDataSetChanged: (() -> Unit)? = null
 }

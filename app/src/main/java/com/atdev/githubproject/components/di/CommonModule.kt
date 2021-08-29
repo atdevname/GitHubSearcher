@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.atdev.githubproject.search.api.ApiService
 import com.atdev.githubproject.search.api.NetworkConnectionInterceptor
-import com.atdev.githubproject.collection.room.RepositoryDatabase
+import com.atdev.githubproject.collection.room.AppDatabase
 import com.atdev.githubproject.components.router.AppRouter
 import dagger.Module
 import dagger.Provides
@@ -40,11 +40,11 @@ class CommonModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(application: Application) = RepositoryDatabase.getDatabase(application)
+    fun provideDatabase(application: Application) = AppDatabase.getDatabase(application)
 
     @Singleton
     @Provides
-    fun provideDao(db: RepositoryDatabase) = db.repositoryDao()
+    fun provideDao(db: AppDatabase) = db.repositoryDao()
 
     @Provides
     @Singleton

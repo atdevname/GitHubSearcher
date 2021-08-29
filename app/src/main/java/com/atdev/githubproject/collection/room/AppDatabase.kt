@@ -8,15 +8,15 @@ import com.atdev.githubproject.search.model.RepositoryCollectionEntity
 
 @Database(entities = [
     RepositoryCollectionEntity::class], version = 5, exportSchema = false)
-abstract class RepositoryDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun repositoryDao(): RepositoryDao
 
     companion object {
         @Volatile
-        private var INSTANCE: RepositoryDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context): RepositoryDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -24,7 +24,7 @@ abstract class RepositoryDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    RepositoryDatabase::class.java,
+                    AppDatabase::class.java,
                     "repository_database"
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance

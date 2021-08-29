@@ -15,6 +15,9 @@
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_remove_from_queue_24.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_iconmonstr.xml" value="0.22828947368421051" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_iconmonstr_black.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_iconmonstr_light.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_iconmonstr_white.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22828947368421051" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/ic_user.xml" value="0.225" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/inside_cardview.xml" value="0.2222222222222222" />
@@ -22,7 +25,7 @@
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/drawable/splash_background.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.2703125" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/activity_main.xml" value="0.21546052631578946" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_auth.xml" value="0.21546052631578946" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_collection.xml" value="0.21217105263157895" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/fragment_profile.xml" value="0.21546052631578946" />
@@ -31,6 +34,8 @@
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/list_item_downloaded_repository.xml" value="0.21217105263157895" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/layout/list_item_search_repository.xml" value="0.33" />
         <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/menu/bar_menu.xml" value="0.21546052631578946" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/menu/collection_menu.xml" value="0.21217105263157895" />
+        <entry key="..\:/Users/Tikhon/Desktop/GitHubProject/app/src/main/res/menu/search_menu.xml" value="0.21217105263157895" />
       </map>
     </option>
   </component>

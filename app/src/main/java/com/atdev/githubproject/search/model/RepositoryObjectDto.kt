@@ -10,7 +10,7 @@ data class RepositoryObjectDto(
     val html_url: String,
     var forks_count: String,
     var watchers_count: String,
-    var language: String? = "",
+    var language: String? = null,
     var added: Boolean = false,
     val id: String = UUID.randomUUID().toString(),
 ){

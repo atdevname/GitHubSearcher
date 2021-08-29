@@ -43,7 +43,7 @@ class SearchAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
-        val owner:TextView = view.findViewById(R.id.owner)
+        val owner: TextView = view.findViewById(R.id.owner)
         val watchers: TextView = view.findViewById(R.id.watchers)
         var forks: TextView = view.findViewById(R.id.forks)
         var language: TextView = view.findViewById(R.id.language)
@@ -61,7 +61,7 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo = getItem(position)
+        val repo: RepositoryObjectDto? = getItem(position)
         if (repo != null) {
 
             holder.name.text = repo.name
@@ -69,7 +69,7 @@ class SearchAdapter(
             holder.watchers.text = repo.watchers_count
             holder.forks.text = repo.forks_count
 
-            if (repo.language!!.isNotEmpty()) {
+            if (!repo.language.isNullOrEmpty()) {
                 holder.language.visibility = View.VISIBLE
                 holder.language.text = repo.language
             }

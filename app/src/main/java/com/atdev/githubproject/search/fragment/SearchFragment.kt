@@ -53,8 +53,6 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
         binding.recycler.adapter = adapter?.withLoadStateFooter(FooterAdapter { adapter?.retry() })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        searchViewModel.notifyDataSetChanged = { adapter?.notifyDataSetChanged() }
-
         setupObservers()
         adapterStateListener()
 
