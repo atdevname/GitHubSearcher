@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.atdev.githubproject.MainActivity">
+
+    <item
+        android:id="@+id/action_clearAll"
+        android:icon="@drawable/ic_baseline_delete_outline_24"
+        app:showAsAction="collapseActionView"
+        android:title="@string/collection_clear_all" />
+</menu>

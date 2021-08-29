@@ -23,6 +23,12 @@ class CollectionViewModel @Inject constructor(
         }
     }
 
+    fun deleteAllDao() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainRepository.deleteAllDownloaded()
+        }
+    }
+
     val groupEmptyListVisibility: LiveData<Boolean> =
         downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext)
             .map { it.isEmpty() }

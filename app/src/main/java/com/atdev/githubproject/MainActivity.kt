@@ -26,17 +26,12 @@ import javax.inject.Inject
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
-
-
-
 /*
 * Пагинация с кэшом
+* Темная тема
 * Кастомный ресайкл
-* Чистка всего списка в коллекции
 * Сортировка
 * Анимация
-* Темная тема
 * Авторизация через гитхаб и гугл
 * */
 @AndroidEntryPoint
@@ -124,16 +119,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         searchView.setOnQueryTextListener(queryTextListener)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun invalidateOptionsMenu() {
-        super.invalidateOptionsMenu()
     }
 
     override fun onSupportNavigateUp(): Boolean {
