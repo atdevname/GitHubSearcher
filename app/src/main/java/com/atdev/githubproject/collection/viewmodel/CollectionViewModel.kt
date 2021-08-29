@@ -28,12 +28,4 @@ class CollectionViewModel @Inject constructor(
             mainRepository.deleteAllDownloaded()
         }
     }
-
-    val groupEmptyListVisibility: LiveData<Boolean> =
-        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext)
-            .map { it.isEmpty() }
-    val recyclerVisibility: LiveData<Boolean> =
-        downloadedListRepositoryEntity.asLiveData(viewModelScope.coroutineContext)
-            .map { !it.isNullOrEmpty() }
-
 }
