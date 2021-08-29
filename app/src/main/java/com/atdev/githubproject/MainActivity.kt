@@ -29,10 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 /*
 * Пагинация с кэшом
 * Темная тема
-* Кастомный ресайкл
 * Сортировка
-* Анимация
-* Авторизация через гитхаб и гугл
 * */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -68,7 +65,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
-
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.search_fragment,

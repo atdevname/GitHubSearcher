@@ -8,23 +8,19 @@
         android:id="@+id/profile_fragment"
         android:name="com.atdev.githubproject.profile.fragments.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile">
-    </fragment>
+        tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/search_fragment"
         android:name="com.atdev.githubproject.search.fragment.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search">
-
-    </fragment>
+        tools:layout="@layout/fragment_search"/>
 
     <fragment
         android:id="@+id/collection_fragment"
         android:name="com.atdev.githubproject.collection.fragment.CollectionFragment"
         android:label="Collection"
-        tools:layout="@layout/fragment_collection">
-    </fragment>
+        tools:layout="@layout/fragment_collection"/>
 
     <activity
         android:id="@+id/loginActivity"
