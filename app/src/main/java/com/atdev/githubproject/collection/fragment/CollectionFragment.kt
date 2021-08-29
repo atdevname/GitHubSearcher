@@ -41,8 +41,10 @@ class CollectionFragment : Fragment(), AdapterDeleteItemClickListener {
         (requireActivity() as MainActivity).invalidateOptionsMenu()
 
         binding.viewModel = viewModel
-        binding.recycler.adapter = adapter
+
+        binding.recycler.setEmptyView(binding.emptyGroup)
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycler.adapter = adapter
 
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.downloadedListRepositoryEntity.collect {
@@ -51,9 +53,6 @@ class CollectionFragment : Fragment(), AdapterDeleteItemClickListener {
         }
 
         setHasOptionsMenu(true)
-
-        setVisibilityGroupListeners()
-
         return binding.root
     }
 
@@ -72,21 +71,7 @@ class CollectionFragment : Fragment(), AdapterDeleteItemClickListener {
         }
     }
 
-    private fun setVisibilityGroupListeners() {
-        viewModel.recyclerVisibility.observe(viewLifecycleOwner, {
-            if (it) binding.recycler.visibility = View.VISIBLE
-            else binding.recycler.visibility = View.INVISIBLE
-        })
-
-        viewModel.groupEmptyListVisibility.observe(viewLifecycleOwner, {
-            if (it) binding.emptyListGroup.visibility = View.VISIBLE
-            else binding.emptyListGroup.visibility = View.INVISIBLE
-        })
-    }
-
     override fun onItemDeleteClickListener(item: RepositoryCollectionEntity) {
         viewModel.deleteItemDao(item)
     }
-
-
 }
