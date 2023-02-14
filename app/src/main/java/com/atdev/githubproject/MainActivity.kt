@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun activateToolbarSearch(menu: Menu) {
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
-        searchView.queryHint = "Search by name" //TODO ToString
+        searchView.queryHint = getString(R.string.search_by_name)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.action_search).actionView as SearchView).apply {
