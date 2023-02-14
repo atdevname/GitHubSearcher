@@ -14,23 +14,14 @@
         android:theme="@style/Theme_GitHubProject">
 
         <activity
-            android:name="com.atdev.githubproject.profile.auth.activity.LoginActivity"
-            android:exported="true"
-            android:theme="@style/SplashTheme"
-            android:label="@string/title_activity_login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
-
             </intent-filter>
         </activity>
 

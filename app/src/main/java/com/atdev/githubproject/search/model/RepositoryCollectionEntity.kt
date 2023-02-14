@@ -30,4 +30,4 @@ data class RepositoryCollectionEntity(
 
     @PrimaryKey
     var id: String,
-    )
+)

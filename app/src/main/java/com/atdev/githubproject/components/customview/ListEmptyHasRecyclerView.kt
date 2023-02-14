@@ -3,9 +3,7 @@ package com.atdev.githubproject.components.customview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.coroutineScope
 
 class ListEmptyHasRecyclerView @JvmOverloads constructor(
     context: Context,

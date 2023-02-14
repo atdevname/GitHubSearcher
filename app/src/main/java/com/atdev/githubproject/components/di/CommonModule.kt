@@ -2,10 +2,9 @@ package com.atdev.githubproject.components.di
 
 import android.app.Application
 import android.content.Context
+import com.atdev.githubproject.collection.room.AppDatabase
 import com.atdev.githubproject.search.api.ApiService
 import com.atdev.githubproject.search.api.NetworkConnectionInterceptor
-import com.atdev.githubproject.collection.room.AppDatabase
-import com.atdev.githubproject.components.router.AppRouter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,9 +44,4 @@ class CommonModule {
     @Singleton
     @Provides
     fun provideDao(db: AppDatabase) = db.repositoryDao()
-
-    @Provides
-    @Singleton
-    fun provideAppRouter() = AppRouter()
-
 }

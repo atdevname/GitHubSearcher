@@ -6,6 +6,7 @@ import com.atdev.githubproject.search.model.RepositoryCollectionEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,18 +15,16 @@ class CollectionViewModel @Inject constructor(
     private val mainRepository: MainRepository,
 ) : ViewModel() {
 
-    val downloadedListRepositoryEntity: Flow<List<RepositoryCollectionEntity>> =
-        mainRepository.getAllDownloadedRepository()
+    val savedRepository: Flow<List<RepositoryCollectionEntity>> =
+        mainRepository.getAllSavedRepository().flowOn(Dispatchers.IO)
 
-    fun deleteItemDao(item: RepositoryCollectionEntity) {
+    fun onDeleteItemClicked(item: RepositoryCollectionEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            mainRepository.deleteItemDao(item)
+            mainRepository.deleteSavedRep(item)
         }
-    }
 
-    fun deleteAllDao() {
+    fun onDeleteAllClicked() =
         viewModelScope.launch(Dispatchers.IO) {
             mainRepository.deleteAllDownloaded()
         }
-    }
 }

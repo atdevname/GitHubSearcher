@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardViewTheme"
-    app:cardUseCompatPadding="true"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/owner"
                 style="@style/OwnerTextFieldStyle"
                 android:layout_width="wrap_content"
@@ -46,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/name"
                 tools:text="atdev" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/name"
                 style="@style/RepositoryNameFieldStyle"
                 android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="engapp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/watchers"
                 style="@style/RepositoryDataFieldStyle"
                 android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
                 app:layout_constraintVertical_bias="0.736"
                 tools:text="25" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forks"
                 style="@style/RepositoryDataFieldStyle"
                 android:layout_width="wrap_content"
@@ -85,7 +86,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="12" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/language"
                 style="@style/RepositoryDataFieldStyle"
                 android:layout_width="wrap_content"
@@ -102,7 +103,7 @@
                 tools:text="Kotlin"
                 tools:visibility="visible" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/userIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,11 +114,26 @@
                 app:layout_constraintTop_toTopOf="@+id/owner"
                 app:layout_constraintVertical_bias="0.32999998" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/delete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_baseline_delete_outline_24"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.951"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.512"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_baseline_add_24"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.951"

@@ -1,14 +1,11 @@
 package com.atdev.githubproject
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.atdev.githubproject.search.model.RepositoryObjectDto
+import com.atdev.githubproject.collection.room.RepositoryDao
 import com.atdev.githubproject.search.api.ApiService
-import com.atdev.githubproject.search.datasource.RepositoryPagingDataSource
 import com.atdev.githubproject.search.model.RepositoryCollectionEntity
-import com.atdev.githubproject.collection.room.*
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -16,24 +13,15 @@ class MainRepository @Inject constructor(
     private val apiService: ApiService
 ) {
 
-    fun getPagingDataByName(query:String): Flow<PagingData<RepositoryObjectDto>> {
-        return Pager(
-            config = PagingConfig(20),
-            pagingSourceFactory = { RepositoryPagingDataSource(apiService,query) }
-        ).flow
-    }
+    suspend fun getReposByName(query:String) = flowOf(apiService.searchRepos(query))
 
-    fun getAllDownloadedRepository(): Flow<List<RepositoryCollectionEntity>> = repositoryDao.getAllDownloadedRepository()
+    fun getAllSavedRepository() = repositoryDao.getAllSavedReps()
 
-    suspend fun addItemInDao(item: RepositoryCollectionEntity) {
-        repositoryDao.addDownloadedRepository(item)
-    }
+    suspend fun saveRep(item: RepositoryCollectionEntity) =
+        repositoryDao.saveRep(item)
 
-    suspend fun deleteItemDao(item: RepositoryCollectionEntity) {
-        repositoryDao.deleteDownloadedRepository(item)
-    }
+    suspend fun deleteSavedRep(item: RepositoryCollectionEntity) =
+        repositoryDao.deleteSavedRep(item)
 
-    suspend fun deleteAllDownloaded() {
-        repositoryDao.deleteAllDownloaded()
-    }
+    suspend fun deleteAllDownloaded() = repositoryDao.deleteAllSavedReps()
 }

@@ -13,7 +13,7 @@ data class RepositoryObjectDto(
     var language: String? = null,
     var added: Boolean = false,
     val id: String = UUID.randomUUID().toString(),
-){
+) {
     fun transformItemInDao(): RepositoryCollectionEntity {
         return RepositoryCollectionEntity(
             this.name,

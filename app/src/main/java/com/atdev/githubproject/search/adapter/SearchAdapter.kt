@@ -1,110 +1,79 @@
 package com.atdev.githubproject.search.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.search.listeners.AdapterItemClickListener
 import com.atdev.githubproject.search.model.RepositoryObjectDto
 import com.squareup.picasso.Picasso
+import kotlin.properties.Delegates
 
 class SearchAdapter(
     private val listener: AdapterItemClickListener
 ) :
-    PagingDataAdapter<RepositoryObjectDto, SearchAdapter.ViewHolder>(COMPARATOR) {
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<RepositoryObjectDto>() {
-            override fun areItemsTheSame(
-                oldItem: RepositoryObjectDto,
-                newItem: RepositoryObjectDto
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(
-                oldItem: RepositoryObjectDto,
-                newItem: RepositoryObjectDto
-            ): Boolean {
-                return oldItem == newItem
-            }
-        }
+    var dataSet: List<RepositoryObjectDto> by Delegates.observable(listOf()) { _, _, _ ->
+        notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.name)
+    inner class ViewHolder(
+        view: View,
+    ) : RecyclerView.ViewHolder(view) {
         val owner: TextView = view.findViewById(R.id.owner)
+        val name: TextView = view.findViewById(R.id.name)
         val watchers: TextView = view.findViewById(R.id.watchers)
         var forks: TextView = view.findViewById(R.id.forks)
         var language: TextView = view.findViewById(R.id.language)
-
         var profileImage: ImageView = view.findViewById(R.id.profileImage)
+        val add: ImageView = view.findViewById(R.id.add)
 
-        var add: ImageView = view.findViewById(R.id.add)
+        init {
+            add.isVisible = true
 
+            itemView.setOnClickListener {
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[adapterPosition].html_url))
+                view.context.startActivity(intent)
+            }
+
+            add.setOnClickListener {
+                it.setBackgroundResource(R.drawable.ic_baseline_done_24)
+                listener.onItemAddClickListener(dataSet[adapterPosition])
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_search_repository, parent, false)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.list_item_repository, viewGroup, false)
+
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repo: RepositoryObjectDto? = getItem(position)
-        if (repo != null) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-            holder.name.text = repo.name
-            holder.owner.text = repo.owner.login
-            holder.watchers.text = repo.watchers_count
-            holder.forks.text = repo.forks_count
+        Picasso.get().load(dataSet[position].owner.avatar_url).noFade().fit().centerCrop()
+            .into(viewHolder.profileImage)
 
-            if (!repo.language.isNullOrEmpty()) {
-                holder.language.visibility = View.VISIBLE
-                holder.language.text = repo.language
-            }
+        viewHolder.owner.text = dataSet[position].owner.login
+        viewHolder.name.text = dataSet[position].name
 
-            Picasso.get().load(repo.owner.avatar_url).noFade().fit().centerCrop()
-                .into(holder.profileImage)
+        viewHolder.watchers.text = dataSet[position].watchers_count
+        viewHolder.forks.text = dataSet[position].forks_count
 
-            ///Переделать
-            holder.add.setOnClickListener {
-                listener.onItemAddClickListener(repo)
-                it.setBackgroundResource(R.drawable.ic_baseline_done_24)
-            }
-
+        if (dataSet[position].language.isNullOrEmpty()) {
+            viewHolder.language.visibility = View.VISIBLE
+            viewHolder.language.text = dataSet[position].language
         }
     }
-}
 
-class FooterAdapter(val retry: () -> Unit) : LoadStateAdapter<FooterAdapter.ViewHolder>() {
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
-        val retryButton: Button = itemView.findViewById(R.id.retry_button)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.footer_item, parent, false)
-        val holder = ViewHolder(view)
-        holder.retryButton.setOnClickListener {
-            retry()
-        }
-        return holder
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
-        holder.progressBar.isVisible = loadState is LoadState.Loading
-        holder.retryButton.isVisible = loadState is LoadState.Error
-    }
+    override fun getItemCount() = dataSet.size
 }

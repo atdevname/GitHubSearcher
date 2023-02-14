@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.atdev.githubproject.R
 import com.atdev.githubproject.search.listeners.AdapterDeleteItemClickListener
@@ -31,26 +32,27 @@ class CollectionListAdapter(
         val watchers: TextView = view.findViewById(R.id.watchers)
         var forks: TextView = view.findViewById(R.id.forks)
         var language: TextView = view.findViewById(R.id.language)
-
         var profileImage: ImageView = view.findViewById(R.id.profileImage)
         var delete: ImageView = view.findViewById(R.id.delete)
 
         init {
+            delete.isVisible = true
+
             itemView.setOnClickListener {
                 val intent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[absoluteAdapterPosition].html_url))
+                    Intent(Intent.ACTION_VIEW, Uri.parse(dataSet[adapterPosition].html_url))
                 view.context.startActivity(intent)
             }
 
             delete.setOnClickListener {
-                listener.onItemDeleteClickListener(dataSet[absoluteAdapterPosition])
+                listener.onItemDeleteClickListener(dataSet[adapterPosition])
             }
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.list_item_collection_repository, viewGroup, false)
+            .inflate(R.layout.list_item_repository, viewGroup, false)
 
         return ViewHolder(view)
     }

@@ -5,23 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.atdev.githubproject.MainActivity
 import com.atdev.githubproject.R
-import com.atdev.githubproject.search.adapter.FooterAdapter
-import com.atdev.githubproject.search.adapter.SearchAdapter
+import com.atdev.githubproject.components.shareviewmodel.SharedViewModel
 import com.atdev.githubproject.databinding.FragmentSearchBinding
+import com.atdev.githubproject.search.adapter.SearchAdapter
+import com.atdev.githubproject.search.api.NoConnectivityException
 import com.atdev.githubproject.search.listeners.AdapterItemClickListener
 import com.atdev.githubproject.search.model.RepositoryObjectDto
-import com.atdev.githubproject.components.utils.ViewModelEvent
 import com.atdev.githubproject.search.viewmodel.SearchViewModel
-import com.atdev.githubproject.components.shareviewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -35,72 +32,61 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
     private val searchViewModel: SearchViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    private val adapter by lazy { activity?.let { SearchAdapter(this) } }
+    private val adapter by lazy { SearchAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_search,
-            container,
-            false
-        )
-        (requireActivity() as MainActivity).invalidateOptionsMenu()
-
-        binding.viewModel = searchViewModel
-        binding.recycler.adapter = adapter?.withLoadStateFooter(FooterAdapter { adapter?.retry() })
-        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
-
-        setupObservers()
-        adapterStateListener()
-
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private fun setupObservers() {
-        searchViewModel.networkConnected.observe(viewLifecycleOwner, {
-            sharedViewModel.networkConnected.postValue(ViewModelEvent(it))
-        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        observeVMs()
+    }
 
-        sharedViewModel.searchValue.observe(viewLifecycleOwner, { event ->
-            event.getValueOnceOrNull()?.let {
-                searchViewModel.searchByName(it)
-            }
-            lifecycleScope.launch(Dispatchers.IO) {
-                searchViewModel.repositoryFlow?.collect {
-                    adapter!!.submitData(it)
+    private fun initViews() {
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycler.adapter = adapter
+        binding.recycler.setEmptyView(binding.emptyGroup)
+    }
+
+    private fun observeVMs() {
+
+        searchViewModel.apply {
+            lifecycleScope.launch(Dispatchers.Main) {
+                repositoryList.collect {
+                    adapter.dataSet = it
                 }
             }
-        })
+
+            progressBarEnabled.observe(viewLifecycleOwner) {
+                binding.progressIndicator.isVisible = it
+            }
+
+            error.observe(viewLifecycleOwner) {
+
+                val errorText = if (it is NoConnectivityException) {
+                    getString(R.string.no_internet_toast)
+                } else {
+                    getString(R.string.common_error_toast)
+                }
+
+                Toast.makeText(requireContext(), errorText, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        sharedViewModel.searchValue.observe(viewLifecycleOwner) { event ->
+            event.getValueOnceOrNull()?.let {
+                searchViewModel.onSearchClicked(it)
+            }
+        }
     }
 
     override fun onItemAddClickListener(item: RepositoryObjectDto) {
-        searchViewModel.addItemInDao(item)
-    }
-
-    private fun adapterStateListener() {
-        adapter?.addLoadStateListener {
-            when (it.refresh) {
-                is LoadState.NotLoading -> {
-                    binding.progressIndicator.visibility = View.INVISIBLE
-                    binding.recycler.visibility = View.VISIBLE
-                }
-                is LoadState.Loading -> {
-                    binding.progressIndicator.visibility = View.VISIBLE
-                    binding.recycler.visibility = View.INVISIBLE
-                }
-                is LoadState.Error -> {
-                    val state = it.refresh as LoadState.Error
-                    binding.progressIndicator.visibility = View.INVISIBLE
-                    Toast.makeText(
-                        requireContext(),
-                        "Load Error: ${state.error.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+        searchViewModel.onSaveRepositoryClicked(item)
     }
 }
